@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Test1",
+        "shortcut": [162, 160, 76],
+        "actions": [
+            {
+                "class": "mouse_move_to",
+                "args": {"x": 2090, "y": 20}
+            }
+        ]
+    }
+]

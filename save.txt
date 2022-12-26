@@ -1,0 +1,15 @@
+    # On convertit le nom d'une touche en texte
+    # Ex : decimal => .
+    def convert_name_to_text(name: str) -> str:
+        # Texte de sortie
+        text: str = name
+
+        # On check les charactères spéciaux
+        match name:
+            case "space":   text = " "              # Espace
+            case "enter":   text = "\n"             # Enter
+            case "decimal": text = "."              # Decimal
+            case _:         text = ""               # Default
+
+        # On retourne le texte convertit
+        return text

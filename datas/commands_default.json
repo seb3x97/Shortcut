@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Test1",
+        "shortcut": [162, 160, 76],
+        "actions": [
+            {
+                "class": "other_draw",
+                "args": {"src": "C:/Users/svoide/Desktop/Draw.jpeg"}
+            }
+        ]
+    }
+]

@@ -5,7 +5,7 @@
         "actions": [
             {
                 "class": "other_draw",
-                "args": {"src": "C:/Users/svoide/Desktop/Draw.jpeg"}
+                "args": {"src": "C:/Users/svoide/Desktop/Draw.jpg"}
             }
         ]
     }

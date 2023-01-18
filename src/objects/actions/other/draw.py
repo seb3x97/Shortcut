@@ -26,7 +26,7 @@ class ActionOtherDraw(Action):
 
         width, height = img.size
 
-        init_x, init_y = (2219, 283) #self._startup.mouse_manager.get_mouse_pos()
+        init_x, init_y = (1961, 181) #self._startup.mouse_manager.get_mouse_pos()
 
         colors: dict[tuple, list[tuple]] = {}
 

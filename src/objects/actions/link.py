@@ -12,6 +12,9 @@ from src.objects.actions.mouse.move_to import ActionMouseMoveTo
 from src.objects.actions.mouse.move import ActionMouseMove
 from src.objects.actions.mouse.scroll import ActionMouseScroll
 
+# Mode
+from src.objects.actions.mode.creative import ActionModeCreative
+
 # Other
 from src.objects.actions.other.draw import ActionOtherDraw
 from src.objects.actions.other.sleep import ActionOtherSleep
@@ -30,6 +33,9 @@ action_links = {
     'mouse_move_to': ActionMouseMoveTo,
     'mouse_move': ActionMouseMove,
     'mouse_scroll': ActionMouseScroll,
+
+    # Mode
+    'mode_creation': ActionModeCreative,
 
     # Other
     'other_draw': ActionOtherDraw,

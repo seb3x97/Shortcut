@@ -1,6 +1,5 @@
 import time
 import multiprocessing
-from threading import Thread
 
 def func1():
     i = 0
@@ -10,12 +9,15 @@ def func1():
         time.sleep(3)
 
 if __name__ == '__main__':
+    lock = multiprocessing.Lock()
+    text = multiprocessing.Value()
+    thread: multiprocessing.Process = multiprocessing.Process(target=func1, args=())
+    thread
+    thread.start()
 
-    thread1 = multiprocessing.Process(target=func1, args=())
-
-    thread1.start()
-    time.sleep(10)
+    time.sleep(5)
     print("we")
-    thread1.terminate()
+    time.sleep(5)
+    thread.terminate()
 
     print("end")

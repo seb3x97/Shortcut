@@ -25,9 +25,9 @@ class ModeAction(Mode):
         if not self.__process is None and self.__process.is_alive(): return False
 
         # On démarre le processus
-        self.exec_actions(command.actions)
-        #self.__process: multiprocessing.Process = multiprocessing.Process(target=self.exec_actions, args=(command.actions,))
-        #self.__process.start()
+        #self.exec_actions(command.actions)
+        self.__process: multiprocessing.Process = multiprocessing.Process(target=self.exec_actions, args=(command.actions,))
+        self.__process.start()
 
         # Succès
         return True

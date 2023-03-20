@@ -22,7 +22,7 @@ class ActionOtherDraw(Action):
     def start(self) -> bool:
 
         img = Image.open(self.src)
-        img = img.convert('P', palette=Image.Palette.ADAPTIVE, colors=50).convert('RGBA')
+        img = img.convert('P', palette=Image.Palette.ADAPTIVE, colors=20).convert('RGBA')
 
         width, height = img.size
 

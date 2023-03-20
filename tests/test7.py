@@ -4,57 +4,38 @@ from time import sleep
 from random import random
 from multiprocessing import Process
 from multiprocessing.managers import BaseManager
-from random import randint
  
 # custom class
 class MyCustomClass():
     # constructor
-    def __init__(self, actions):
-        self.name = ""
+    def __init__(self):
         # store the data in the instance
-        self.actions = actions
-
-    def getActions(self):
-        return self.actions
-    
-    def setActions(self, value):
-        self.actions = value
-
-    def setName(self, value):
-        self.name = value
+        self._name = "test"
+        self.element = MyCustomClass()
 
     def getName(self):
-        return self.name
+        return self._name
+    
+    def setName(self, value):
+        self._name = value
+
+    def getElement(self):
+        return self.element
  
 # custom manager to support custom classes
 class CustomManager(BaseManager):
     # nothing
     pass
-
-class Action:
-    def __init__(self) -> None:
-        self.name = "test"
-
-    def setName(self, value):
-        self.name = value
-
-    def getName(self):
-        return self.name
  
 # custom function to be executed in a child process
-def work(manager):
+def work(shared_custom):
     # call the function on the shared custom instance
-    print(f"before {manager.getName()}")
-
-    for action in manager.getActions():
-        action.setName("=> " + str(randint(0, 10000)))
+    print(f"before {shared_custom.getName()}")
+    
+    shared_custom.setName("we")
 
     # report the value
-    manager.setName("asdfgasdas")
-    print(f"after {manager.getName()}")
-
-    for action in manager.getActions():
-        print(action.getName())
+    print(f"after {shared_custom.getName()}")
  
 # protect the entry point
 if __name__ == '__main__':
@@ -62,9 +43,8 @@ if __name__ == '__main__':
     CustomManager.register('MyCustomClass', MyCustomClass)
     # create a new manager instance
     with CustomManager() as manager:
-        actions = [Action(), Action(), Action()]
         # create a shared custom class instance
-        shared_custom = manager.MyCustomClass(actions)
+        shared_custom = manager.MyCustomClass()
 
         # start some child processes
         process = Process(target=work, args=(shared_custom,))
@@ -74,5 +54,4 @@ if __name__ == '__main__':
         # all done
         print('Done')
 
-        for action in shared_custom.getActions():
-            print(action.getName())
+        print(f"end {shared_custom.getElement().getName()}")

@@ -4,8 +4,8 @@
         "shortcut": [162, 160, 76],
         "actions": [
             {
-                "class": "mouse_move_to",
-                "args": {"x": 2090, "y": 20}
+                "class": "other_draw",
+                "args": {"src": "C:/Users/svoide/Desktop/Drw2.jpg"}
             }
         ]
     }

@@ -9,9 +9,9 @@ from src.objects.actions.action import Action
 # Class ActionMouseClick
 class ActionMouseClick(Action):
     # Constructeur Renseigné
-    def __init__(self, startup, btn_value: tuple = (), count: int = 1) -> None:
+    def __init__(self, handler, btn_value: tuple = (), count: int = 1) -> None:
         # Parent
-        super().__init__(startup)
+        super().__init__(handler)
 
         # On enregistre
         self.button: mouse.Button   = mouse.Button.left
@@ -20,7 +20,7 @@ class ActionMouseClick(Action):
     # On démarre l'action
     def start(self) -> bool:
         # Action => click
-        self._startup.mouse_manager.click(self.button, self.count)
+        self._handler.mouse_manager.click(self.button, self.count)
         
         # Succès
         return True

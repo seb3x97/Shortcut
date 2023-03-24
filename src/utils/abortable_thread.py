@@ -13,8 +13,8 @@ class AbortableThread(threading.Thread):
         # Check si le thread est démarré
         if not self.is_alive: return None
 
-        # On retourne l'identifiant (système) du thread
-        return self.native_id
+        # On retourne l'identifiant (python) du thread
+        return self.ident
 
     # On force le thread à s'arrêter en injectant une exception
     def abort(self) -> bool:

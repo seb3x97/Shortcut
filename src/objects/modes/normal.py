@@ -9,6 +9,11 @@ class ModeNormal(Mode):
         # Parent
         super().__init__(handler)
 
+    # On initialise les variables
+    def init(self) -> bool:
+        # Succès
+        return True
+
     # On démarre le mode
     def start(self) -> bool:
         return True
@@ -25,8 +30,10 @@ class ModeNormal(Mode):
         # On récupére le code unique
         code: tuple = tuple(codes)
 
+        if new: print("normal mode")
+
         # Si le raccourci éxiste dans la liste des commandes on charge l'action
-        if new and (code in self._startup.commands): self.load_action(code)
+        if new and (code in self._handler.commands): self.load_action(code)
 
 
     #---------- Functions ----------#
@@ -35,7 +42,7 @@ class ModeNormal(Mode):
     def load_action(self, code: tuple) -> bool:
         from src.objects.enums.mode_type import ModeType
         # On essaye de mettre le mode action
-        if not self._startup.set_mode(ModeType.ACTION, [self._startup.commands[code]]):
+        if not self._handler.start_mode(ModeType.ACTION, [self._handler.commands[code]]):
             print("Impossible de changer de mode")
             return False
 

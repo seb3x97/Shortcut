@@ -12,21 +12,24 @@ from src.objects.enums.virtual_keys import VirtualKeys
 # Class ActionOtherDraw
 class ActionOtherDraw(Action):
     # Constructeur Renseigné
-    def __init__(self, startup) -> None:
+    def __init__(self, handler) -> None:
         # Parent
-        super().__init__(startup)
+        super().__init__(handler)
 
+        # Default
         self.src = ""
 
     # On démarre l'action
     def start(self) -> bool:
-
+        # Check si un chemin a été renseigné
+        if self.src == "": return False
+        
         img = Image.open(self.src)
         img = img.convert('P', palette=Image.Palette.ADAPTIVE, colors=20).convert('RGBA')
 
         width, height = img.size
 
-        init_x, init_y = (1961, 181) #self._startup.mouse_manager.get_mouse_pos()
+        init_x, init_y = (1961, 181) #self._handler.mouse_manager.get_mouse_pos()
 
         colors: dict[tuple, list[tuple]] = {}
 
@@ -48,8 +51,8 @@ class ActionOtherDraw(Action):
         for color in colors:
             positions = colors[color]
 
-            self._startup.mouse_manager.move_to(3040, 69)
-            self._startup.mouse_manager.click(mouse.Button.left, 2)
+            self._handler.mouse_manager.move_to(3040, 69)
+            self._handler.mouse_manager.click(mouse.Button.left, 2)
             time.sleep(1)
 
             POSITIONS = [
@@ -60,26 +63,26 @@ class ActionOtherDraw(Action):
 
             for i in range(len(color)):
                 x, y = POSITIONS[i]
-                self._startup.mouse_manager.move_to(x, y)
-                self._startup.mouse_manager.click(mouse.Button.left, 2)
+                self._handler.mouse_manager.move_to(x, y)
+                self._handler.mouse_manager.click(mouse.Button.left, 2)
                 time.sleep(0.1)
 
                 text = str(color[i])
                 for char in text:
                     vk_name = f"VK_{char}"
                     value = VirtualKeys[vk_name].value
-                    self._startup.keyboard_manager.tap(value)
+                    self._handler.keyboard_manager.tap(value)
                     time.sleep(0.1)
 
-            self._startup.mouse_manager.move_to(2695, 665)
-            self._startup.mouse_manager.click(mouse.Button.left, 2)
+            self._handler.mouse_manager.move_to(2695, 665)
+            self._handler.mouse_manager.click(mouse.Button.left, 2)
             time.sleep(0.1)
 
             count = 0
             for position in positions:
                 x, y = position
-                self._startup.mouse_manager.move_to(init_x + x, init_y + y)
-                self._startup.mouse_manager.click(mouse.Button.left, 1)
+                self._handler.mouse_manager.move_to(init_x + x, init_y + y)
+                self._handler.mouse_manager.click(mouse.Button.left, 1)
                 time.sleep(0.001)
 
                 count += 1

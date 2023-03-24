@@ -5,9 +5,9 @@ from src.objects.actions.action import Action
 # Class ActionKeyboardTap
 class ActionKeyboardTap(Action):
     # Constructeur Renseigné
-    def __init__(self, startup) -> None:
+    def __init__(self, handler) -> None:
         # Parent
-        super().__init__(startup)
+        super().__init__(handler)
 
     # On démarre l'action
     def start(self) -> bool:

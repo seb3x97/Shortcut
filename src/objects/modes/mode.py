@@ -2,20 +2,50 @@
 
 from pynput import mouse
 
+#---------- Locals ----------#
+
+from src.utils.abortable_thread import AbortableThread
+
 # Class Mode
 class Mode():
     # Default Constructor
-    def __init__(self, startup) -> None:
-        from src.startup import Startup
+    def __init__(self, handler) -> None:
+        # Default
+        self.thread: AbortableThread = None
 
         # On enregistre
-        self._startup: Startup = startup
+        self._handler = handler
 
     # On démarre le mode
-    def start(self) -> bool: raise NotImplementedError()
+    def start(self) -> bool:
+        # Check si il n'y a pas de processus en court
+        if not self.thread is None and self.thread.is_alive(): return False
+
+        # On démarre le thread
+        self.thread = AbortableThread(target=self.exec, args=())
+        self.thread.start()
+
+        # Succès
+        return True
 
     # On arrête le mode
-    def stop(self) -> bool: raise NotImplementedError()
+    def stop(self) -> bool:
+        # Check si il y a un processus en court
+        if self.thread is None or not self.thread.is_alive(): return False
+
+        # On termine le thread
+        print("start abort")
+        self.thread.stop()
+        print("end abort")
+
+        # Succès
+        return True
+    
+    # -- Abstract Function -- #
+
+    # Execution du code
+    def init(): raise NotImplementedError()
+    def exec(): raise NotImplementedError()
 
     # Events du clavier
     def on_press(self, code: int, new: bool): pass

@@ -9,6 +9,11 @@ class ModeCreative(Mode):
         # Parent
         super().__init__(handler)
 
+    # On initialise les variables
+    def init(self) -> bool:
+        # Succès
+        return True
+
     # On démarre le mode
     def start(self) -> bool:
         return True

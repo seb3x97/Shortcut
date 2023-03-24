@@ -5,11 +5,9 @@ import src.utils.utils_class as utils_class
 # Class Action
 class Action:
     # Default Constructor
-    def __init__(self, startup) -> None:
-        from src.startup import Startup
-
+    def __init__(self, handler) -> None:
         # On enregistre
-        self._startup: Startup = startup
+        self._handler = handler
 
 
     #---------- Herited ----------#

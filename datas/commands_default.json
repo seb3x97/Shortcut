@@ -1,11 +1,21 @@
 [
     {
-        "name": "Test1",
+        "name": "Draw",
         "shortcut": [162, 160, 76],
         "actions": [
             {
                 "class": "other_draw",
                 "args": {"src": "C:/Users/svoide/Desktop/Drw2.jpg"}
+            }
+        ]
+    },
+    {
+        "name": "Wait",
+        "shortcut": [162, 165, 87],
+        "actions": [
+            {
+                "class": "other_sleep",
+                "args": {"secs": 5}
             }
         ]
     }

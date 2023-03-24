@@ -1,15 +1,7 @@
-#---------- Package ----------#
-
-import multiprocessing
-
 #---------- Locals ----------#
 
 from src.objects.modes.mode import Mode
-#
 from src.objects.command.command import Command
-from src.objects.actions.action import Action
-#
-from src.utils.abortable_thread import AbortableThread
 
 # Class ModeAction
 class ModeAction(Mode):
@@ -18,44 +10,44 @@ class ModeAction(Mode):
         # Parent
         super().__init__(handler)
 
-        # Private
-        self.__thread: AbortableThread = None
-        #self.__process: multiprocessing.Process = None
+        self.__command: Command = None
 
-    # On démarre le processus
-    def start(self, command: Command) -> bool:
-        # Check si il n'y a pas de processus en court
-        if not self.__thread is None and self.__thread.is_alive(): return False
-
-        # On démarre le processus
-        #self.exec_actions(command.actions)
-        #self.__process: multiprocessing.Process = multiprocessing.Process(target=self.exec_actions, args=(command.actions,))
-        #self.__process.start()
-
-        # On démarre le thread
-        self.__thread = AbortableThread(target=self.exec_actions, args=(command.actions))
-        self.__thread.run()
+    # On initialise les variables
+    def init(self, command: Command) -> bool:
+        # On enregistre
+        self.__command = command
 
         # Succès
         return True
 
-    # On arrête le mode
-    def stop(self) -> bool:
-        # Check si il y a un processus en court
-        if self.__process is None or not self.__process.is_alive(): return False
+    # On éxécute les actions d'une commande
+    def exec(self) -> bool:
+        # Check si il n'y a pas de commande
+        if self.__command is None: return False
 
-        # On termine le processus
-        #self.__process.terminate()
-
-        # Succès
-        return True
-
-    # On éxécute les actions
-    def exec_actions(self, actions: list[Action]):
         # On boucle les actions pour les démarrer
-        for action in actions:
+        for action in self.__command.actions:
             action.start()
 
         # On recharge le mode normal
         from src.objects.enums.mode_type import ModeType
-        self._startup.set_mode(ModeType.NORMAL)
+        if not self._handler.start_mode(ModeType.NORMAL): return False
+
+        # Succès
+        return True
+
+
+    #---------- Events ----------#
+
+    # Event raccourci
+    def on_shortcut(self, codes: list[int], new: bool):
+        # On récupére le code unique
+        code: tuple = tuple(codes)
+
+        print("action mode " + str(code))
+
+        default_actions = {
+            (27,): self.stop
+        }
+
+        if code in default_actions: default_actions.get(code)()

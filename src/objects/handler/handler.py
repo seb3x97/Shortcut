@@ -111,10 +111,21 @@ class Handler():
         # Succès
         return True
 
+    # On enregistre le mode (en le démarrant)
+    def start_mode(self, mode_type: ModeType = ModeType.NORMAL, args: tuple = ()) -> bool:
+        # On essaye d'initialiser le mode
+        if not self.set_mode(mode_type, args): return False
+
+        # On essaye de démarrer le mode
+        if not self.mode.start(): return False
+
+        # Succès
+        return True
+
     # On enregistre le mode (sans le démarrer)
     def set_mode(self, mode_type: ModeType, args: tuple = ()) -> bool:
         # On stop l'ancien mode
-        if not self.mode is None: self.stop()
+        if not self.mode is None: self.mode.stop()
 
         # On essaye d'enregistrer le nouveau mode et de l'initialiser
         self.mode = self.__modes.get(mode_type, None)
@@ -130,17 +141,6 @@ class Handler():
         self.mouse_manager.on_move = self.mode.on_move
         self.mouse_manager.on_click = self.mode.on_click
         self.mouse_manager.on_scroll = self.mode.on_scroll
-
-        # Succès
-        return True
-    
-    # On enregistre le mode (en le démarrant)
-    def start_mode(self, mode_type: ModeType, args: tuple = ()) -> bool:
-        # On essaye d'initialiser le mode
-        if not self.set_mode(mode_type, args): return False
-
-        # On essaye de démarrer le mode
-        if not self.mode.start(): return False
 
         # Succès
         return True

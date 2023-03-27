@@ -20,7 +20,7 @@ class ModeAction(Mode):
         # Succès
         return True
 
-    # On éxécute les actions d'une commande
+    # On éxécute les sous-tâches du mode
     def exec(self) -> bool:
         # Check si il n'y a pas de commande
         if self.__command is None: return False
@@ -31,7 +31,7 @@ class ModeAction(Mode):
 
         # On recharge le mode normal
         from src.objects.enums.mode_type import ModeType
-        if not self._handler.start_mode(ModeType.NORMAL): return False
+        if not self._handler.start_mode(): return False
 
         # Succès
         return True
@@ -44,10 +44,8 @@ class ModeAction(Mode):
         # On récupére le code unique
         code: tuple = tuple(codes)
 
-        print("action mode " + str(code))
-
         default_actions = {
-            (27,): self.stop
+            (27,): self._handler.start_mode
         }
 
         if code in default_actions: default_actions.get(code)()

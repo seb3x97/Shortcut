@@ -13,13 +13,10 @@ class ModeNormal(Mode):
     def init(self) -> bool:
         # Succès
         return True
-
-    # On démarre le mode
-    def start(self) -> bool:
-        return True
-
-    # On arrête le mode
-    def stop(self) -> bool:
+    
+    # On éxécute les sous-tâches du mode
+    def exec(self) -> bool:
+        # Succès
         return True
 
 
@@ -29,8 +26,6 @@ class ModeNormal(Mode):
     def on_shortcut(self, codes: list[int], new: bool):
         # On récupére le code unique
         code: tuple = tuple(codes)
-
-        if new: print("normal mode")
 
         # Si le raccourci éxiste dans la liste des commandes on charge l'action
         if new and (code in self._handler.commands): self.load_action(code)

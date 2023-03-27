@@ -1,3 +1,7 @@
+#---------- Package ----------#
+
+from pynput import mouse
+
 #---------- Locals ----------#
 
 from src.objects.modes.mode import Mode
@@ -13,11 +17,18 @@ class ModeCreative(Mode):
     def init(self) -> bool:
         # Succès
         return True
-
-    # On démarre le mode
-    def start(self) -> bool:
+    
+    # On éxécute les sous-tâches du mode
+    def exec(self) -> bool:
+        # Succès
         return True
+    
+    # Events du clavier
+    def on_press(self, code: int, new: bool): pass
+    def on_release(self, code: int): pass
+    def on_shortcut(self, codes: list[int], new: bool): pass
 
-    # On arrête le mode
-    def stop(self) -> bool:
-        return True
+    # Events de la souris
+    def on_move(self, x: int, y: int): pass
+    def on_click(self, x: int, y: int, button: mouse.Button, pressed: bool): pass
+    def on_scroll(self, x: int, y: int, dx: int, dy: int): pass

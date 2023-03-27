@@ -34,9 +34,7 @@ class Mode():
         if self.thread is None or not self.thread.is_alive(): return False
 
         # On termine le thread
-        print("start abort")
         self.thread.stop()
-        print("end abort")
 
         # Succès
         return True

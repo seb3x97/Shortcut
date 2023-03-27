@@ -19,12 +19,8 @@ class ActionOtherSleep(Action):
     # On démarre l'action
     def start(self) -> bool:
         # On mets en pause le thread pendant "x" (secs) secondes
-
-        # If no kill signal is set, sleep for the interval,
-        # If kill signal comes in while sleeping, immediately
-        # wake up and handle
-        time.sleep(self.secs)
-        print("end waiting")
+        # Si un signal arrive pendant la pause, on ne fini pas la pause et on continue le code
+        self._handler.mode.thread.wait(self.secs)
 
         # Succès
         return True

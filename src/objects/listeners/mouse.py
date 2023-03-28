@@ -1,13 +1,14 @@
 #---------- Package ----------#
 
-from pynput import mouse
+from __future__ import annotations
+import pynput.mouse as py_mouse
 
 #---------- Locals ----------#
 
-from src.objects.listeners.listener import Listener
+import src.objects.listeners.listener as Listener
 
 # Class ListenerMouse
-class ListenerMouse(Listener):
+class ListenerMouse(Listener.Listener):
     # Default Constructor
     def __init__(self) -> None:
         # Parent
@@ -19,10 +20,10 @@ class ListenerMouse(Listener):
         self.on_scroll: function = None                 # Evenement => Scroll de la souris
 
         # Controller
-        self.__controller: mouse.Controller = mouse.Controller()
+        self.__controller: py_mouse.Controller = py_mouse.Controller()
 
         # Listener
-        self.__listener: mouse.Listener = mouse.Listener(
+        self.__listener: py_mouse.Listener = py_mouse.Listener(
             on_move=self.__on_move,
             on_click=self.__on_click,
             on_scroll=self.__on_scroll)
@@ -58,7 +59,7 @@ class ListenerMouse(Listener):
         self.__controller.position = (x, y)
 
     # On click avec la souris
-    def click(self, button: mouse.Button, count: int = 1):
+    def click(self, button: py_mouse.Button, count: int = 1):
         self.__controller.click(button=button, count=count)
 
     # On scroll avec la souris
@@ -80,7 +81,7 @@ class ListenerMouse(Listener):
         if not self.on_move is None: self.on_move(x, y)
 
     # Event quand on clique avec la souris
-    def __on_click(self, x: int, y: int, button: mouse.Button, pressed: bool):
+    def __on_click(self, x: int, y: int, button: py_mouse.Button, pressed: bool):
         # On trigger l'event click
         if not self.on_click is None: self.on_click(x, y, button, pressed)
 

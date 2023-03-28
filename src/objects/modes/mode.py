@@ -1,20 +1,22 @@
 #---------- Package ----------#
 
-from pynput import mouse
+from __future__ import annotations
+import pynput.mouse as py_mouse
 
 #---------- Locals ----------#
 
-from src.utils.abortable_thread import AbortableThread
+import src.objects.handler.handler as Handler
+import src.utils.custom_thread as CustomThread
 
 # Class Mode
 class Mode():
     # Default Constructor
-    def __init__(self, handler) -> None:
+    def __init__(self, handler: Handler.Handler) -> None:
         # Default
-        self.thread: AbortableThread = None
+        self.thread: CustomThread.CustomThread = None
 
         # On enregistre
-        self._handler = handler
+        self._handler: Handler.Handler = handler
 
     # On démarre le mode
     def start(self) -> bool:
@@ -22,7 +24,7 @@ class Mode():
         if not self.thread is None and self.thread.is_alive(): return False
 
         # On démarre le thread
-        self.thread = AbortableThread(target=self.exec, args=())
+        self.thread = CustomThread.CustomThread(target=self.exec, args=())
         self.thread.start()
 
         # Succès
@@ -52,5 +54,5 @@ class Mode():
 
     # Events de la souris
     def on_move(self, x: int, y: int): pass
-    def on_click(self, x: int, y: int, button: mouse.Button, pressed: bool): pass
+    def on_click(self, x: int, y: int, button: py_mouse.Button, pressed: bool): pass
     def on_scroll(self, x: int, y: int, dx: int, dy: int): pass

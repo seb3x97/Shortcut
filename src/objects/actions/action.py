@@ -1,13 +1,18 @@
+#---------- Package ----------#
+
+from __future__ import annotations
+
 #---------- Locals ----------#
 
 import src.utils.utils_class as utils_class
+import src.objects.handler.handler as Handler
 
 # Class Action
 class Action:
     # Default Constructor
-    def __init__(self, handler) -> None:
+    def __init__(self, handler: Handler.Handler) -> None:
         # On enregistre
-        self._handler = handler
+        self._handler: Handler.Handler = handler
 
 
     #---------- Herited ----------#

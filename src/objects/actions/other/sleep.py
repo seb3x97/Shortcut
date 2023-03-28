@@ -1,7 +1,3 @@
-#---------- Package ----------#
-
-import time
-
 #---------- Locals ----------#
 
 from src.objects.actions.action import Action

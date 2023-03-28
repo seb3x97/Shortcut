@@ -1,10 +1,14 @@
+#---------- Package ----------#
+
+from __future__ import annotations
+
 #---------- Locals ----------#
 
-from src.objects.managers.manager import Manager
-from src.objects.listeners.keyboard import ListenerKeyboard
+import src.objects.managers.manager as Manager
+import src.objects.listeners.keyboard as Keyboard
 
 # Class ManagerKeyboard
-class ManagerKeyboard(Manager):
+class ManagerKeyboard(Manager.Manager):
     # Default Constructor
     def __init__(self):
         # Parent
@@ -21,7 +25,7 @@ class ManagerKeyboard(Manager):
         self.on_shortcut: function = None                   # Evenement => Raccourci éxecutée
 
         # Listener + ajout des events
-        self.__keyboard_listner: ListenerKeyboard = ListenerKeyboard()
+        self.__keyboard_listner: Keyboard.ListenerKeyboard = Keyboard.ListenerKeyboard()
         self.__keyboard_listner.on_press = self.__on_press
         self.__keyboard_listner.on_release = self.__on_release
 

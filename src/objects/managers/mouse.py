@@ -1,14 +1,15 @@
 #---------- Package ----------#
 
-from pynput import mouse
+from __future__ import annotations
+import pynput
 
 #---------- Locals ----------#
 
-from src.objects.managers.manager import Manager
-from src.objects.listeners.mouse import ListenerMouse
+import src.objects.managers.manager as Manager
+import src.objects.listeners.mouse as Mouse
 
 # Class ManagerMouse
-class ManagerMouse(Manager):
+class ManagerMouse(Manager.Manager):
     # Default Constructor
     def __init__(self):
         # Parent
@@ -23,7 +24,7 @@ class ManagerMouse(Manager):
         self.on_scroll: function = None                 # Evenement => Scroll de la souris
 
         # Listener + ajout des events
-        self.__mouse_listener: ListenerMouse = ListenerMouse()
+        self.__mouse_listener: Mouse.ListenerMouse = Mouse.ListenerMouse()
         self.__mouse_listener.on_move = self.__on_move
         self.__mouse_listener.on_click = self.__on_click
         self.__mouse_listener.on_scroll = self.__on_scroll
@@ -58,7 +59,7 @@ class ManagerMouse(Manager):
         self.__enable_events = True
 
     # On click avec la souris
-    def click(self, button: mouse.Button, count: int = 1):
+    def click(self, button: pynput.mouse.Button, count: int = 1):
         self.__enable_events = False
         self.__mouse_listener.click(button=button, count=count)
         self.__enable_events = True

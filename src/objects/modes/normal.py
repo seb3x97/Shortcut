@@ -1,9 +1,13 @@
+#---------- Package ----------#
+
+from __future__ import annotations
+
 #---------- Locals ----------#
 
-from src.objects.modes.mode import Mode
+import src.objects.modes.mode as Mode
 
 # Class ModeNormal
-class ModeNormal(Mode):
+class ModeNormal(Mode.Mode):
     # Default Constructor
     def __init__(self, handler):
         # Parent

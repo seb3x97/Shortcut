@@ -1,13 +1,14 @@
 #---------- Package ----------#
 
+from __future__ import annotations
 from pynput import mouse
 
 #---------- Locals ----------#
 
-from src.objects.modes.mode import Mode
+import src.objects.modes.mode as Mode
 
 # Class ModeCreative
-class ModeCreative(Mode):
+class ModeCreative(Mode.Mode):
     # Default Constructor
     def __init__(self, handler):
         # Parent

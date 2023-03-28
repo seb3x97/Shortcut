@@ -1,14 +1,15 @@
 #---------- Package ----------#
 
-from typing import Union
-from pynput import keyboard
+from __future__ import annotations
+import pynput.keyboard as py_keyboard
+import typing
 
 #---------- Locals ----------#
 
-from src.objects.listeners.listener import Listener
+import src.objects.listeners.listener as Listener
 
 # Class ListenerKeyboard
-class ListenerKeyboard(Listener):
+class ListenerKeyboard(Listener.Listener):
     # Default Constructor
     def __init__(self):
         # Parent
@@ -19,10 +20,10 @@ class ListenerKeyboard(Listener):
         self.on_release: function = None                    # Evenement => touche relachée
 
         # Controller
-        self.__controller: keyboard.Controller = keyboard.Controller()
+        self.__controller: py_keyboard.Controller = py_keyboard.Controller()
 
         # Listener
-        self.__listener: keyboard.Listener = keyboard.Listener(
+        self.__listener: py_keyboard.Listener = py_keyboard.Listener(
             on_press=self.__on_press,
             on_release=self.__on_release)
 
@@ -31,16 +32,16 @@ class ListenerKeyboard(Listener):
 
     # On récupére le code d'une touche (Virtual Key)
     @staticmethod
-    def get_vk_code(key: Union[keyboard.KeyCode, keyboard.Key]) -> Union[int, None]:
+    def get_vk_code(key: typing.Union[py_keyboard.KeyCode, py_keyboard.Key]) -> typing.Union[int, None]:
         match type(key):
-            case keyboard.KeyCode: return key.vk
-            case keyboard.Key: return key.value.vk
+            case py_keyboard.KeyCode: return key.vk
+            case py_keyboard.Key: return key.value.vk
             case _: return None
 
     # On récupére le KeyCode à partir d'un vk (Virtual Key)
     @staticmethod
-    def get_key_code(code: int) -> keyboard.KeyCode:
-        return keyboard.KeyCode.from_vk(code)
+    def get_key_code(code: int) -> py_keyboard.KeyCode:
+        return py_keyboard.KeyCode.from_vk(code)
 
 
     #---------- Herited ----------#
@@ -82,7 +83,7 @@ class ListenerKeyboard(Listener):
     #---------- Events ----------#
 
     # Event quand une touche est appuyée
-    def __on_press(self, key: Union[keyboard.KeyCode, keyboard.Key]):
+    def __on_press(self, key: typing.Union[py_keyboard.KeyCode, py_keyboard.Key]):
         # On essaye de récupére le code de la clé
         code: int = self.get_vk_code(key=key)
         if code is None: return
@@ -91,7 +92,7 @@ class ListenerKeyboard(Listener):
         if not self.on_press is None: self.on_press(code)
 
     # Event quand une touche est relachée
-    def __on_release(self, key: Union[keyboard.KeyCode, keyboard.Key]):
+    def __on_release(self, key: typing.Union[py_keyboard.KeyCode, py_keyboard.Key]):
         # On essaye de récupére le code de la clé
         code: int = self.get_vk_code(key=key)
         if code is None: return

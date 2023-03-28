@@ -1,8 +1,8 @@
 import threading
 import ctypes
 
-# Class AbortableThread
-class AbortableThread(threading.Thread):
+# Class CustomThread
+class CustomThread(threading.Thread):
     # Constructeur Renseigné
     def __init__(self, *args, **keywords):
         # Parent

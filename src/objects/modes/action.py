@@ -1,19 +1,24 @@
+#---------- Package ----------#
+
+from __future__ import annotations
+
 #---------- Locals ----------#
 
-from src.objects.modes.mode import Mode
-from src.objects.command.command import Command
+import src.objects.modes.mode as Mode
+import src.objects.command.command as Command
 
 # Class ModeAction
-class ModeAction(Mode):
+class ModeAction(Mode.Mode):
     # Default Constructor
     def __init__(self, handler):
         # Parent
         super().__init__(handler)
 
-        self.__command: Command = None
+        # Default
+        self.__command: Command.Command = None
 
     # On initialise les variables
-    def init(self, command: Command) -> bool:
+    def init(self, command: Command.Command) -> bool:
         # On enregistre
         self.__command = command
 
@@ -30,7 +35,6 @@ class ModeAction(Mode):
             action.start()
 
         # On recharge le mode normal
-        from src.objects.enums.mode_type import ModeType
         if not self._handler.start_mode(): return False
 
         # Succès

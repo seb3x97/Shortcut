@@ -23,16 +23,20 @@ DIR_LOG = os.path.join(DIR_ROOT, "log")
 #---------- FICHIERS ----------#
 
 # Config
-FILE_COMMAND_DEFAULT = os.path.join(DIR_ROOT, "datas\commands_default.json")
+FILE_CONFIG_MODE_NORMAL = os.path.join(DIR_ROOT, "config/modes/normal.json")
+FILE_CONFIG_MODE_ACTION = os.path.join(DIR_ROOT, "config/modes/action.json")
+FILE_CONFIG_MODE_CREATIVE = os.path.join(DIR_ROOT, "config/modes/creative.json")
+
+# Datas
 FILE_COMMAND_CREATED = os.path.join(DIR_ROOT, "datas\commands_created.json")
 
 
 #---------- FONCTIONS ----------#
 
-# On récupére la liste des dossiers de ce fichier
+# On récupére la liste des chemins de dossiers renseigné plus haut
 def get_folders():
     return { path: name for path, name in globals().items() if path.startswith('DIR') }
 
-# On récupére la liste des fichiers de ce fichier
+# On récupére la liste des chemins de fichiers renseigné plus haut
 def get_files():
     return { path: name for path, name in globals().items() if path.startswith('FILE') }

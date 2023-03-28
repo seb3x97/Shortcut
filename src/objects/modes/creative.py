@@ -1,7 +1,7 @@
 #---------- Package ----------#
 
 from __future__ import annotations
-from pynput import mouse
+import pynput.mouse as py_mouse
 
 #---------- Locals ----------#
 
@@ -31,5 +31,5 @@ class ModeCreative(Mode.Mode):
 
     # Events de la souris
     def on_move(self, x: int, y: int): pass
-    def on_click(self, x: int, y: int, button: mouse.Button, pressed: bool): pass
+    def on_click(self, x: int, y: int, button: py_mouse.Button, pressed: bool): pass
     def on_scroll(self, x: int, y: int, dx: int, dy: int): pass

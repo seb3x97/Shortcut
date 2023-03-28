@@ -1,0 +1,13 @@
+{
+    "path": {
+        "modes": {
+            "normal": "config/modes/normal.json",
+            "action": "config/modes/action.json",
+            "creative": "config/modes/creative.json"
+        },
+
+        "datas": {
+
+        }
+    }
+}

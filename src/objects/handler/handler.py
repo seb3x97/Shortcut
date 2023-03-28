@@ -10,17 +10,10 @@ from src.objects.managers.mouse import ManagerMouse
 
 # Command
 from src.objects.command.command import Command
-from src.objects.actions.action import Action
-from src.objects.actions.link import action_links
 
 # Modes
 from src.objects.modes.mode import Mode
 from src.objects.enums.mode_type import ModeType, MODES
-
-# Utils
-import src.utils.utils as Utils
-import src.utils.paths as Paths
-import src.utils.json_names as JsonNames
 
 # Class Handler
 class Handler():
@@ -32,8 +25,6 @@ class Handler():
         #
         self.__modes: dict[ModeType, Mode] = {}                             # Dictionnaire de tous les modes
         self.mode: Mode = None                                              # Mode actuel
-        #
-        self.commands: dict[tuple, Command] = {}                            # Liste des commandes
 
     # On initialise la classe
     def init(self) -> bool:
@@ -41,7 +32,6 @@ class Handler():
         self.__modes = {key: MODES[key](self) for key in MODES}
 
         # On essaye de lire les données et mettre le mode par défaut
-        if not self.get_commands(): return False
         if not self.set_mode(ModeType.NORMAL): return False
 
         # Succès
@@ -62,55 +52,6 @@ class Handler():
         self.keyboard_manager.stop()
         self.mouse_manager.stop()
         self.mode.stop()
-
-        # Succès
-        return True
-
-    # On récupére les données (json)
-    def get_commands(self) -> bool:
-        # On essaye de récupérer le contenu du fichier
-        content: str = Utils.read_file_content(Paths.FILE_COMMAND_DEFAULT)
-        if content is None: return False
-
-        # On essaye de convertir le contenu en dictionnaire (json)
-        datas: dict = Utils.convert_text_to_json(content)
-        if datas is None: return False
-
-        # On supprime les anciennes commandes
-        self.commands.clear()
-
-        # On boucle les commandes
-        for data in datas:
-            command_name: str = JsonNames.get_command_name(data)
-            command_shortcut: tuple = JsonNames.get_command_shortcut(data)
-            command_actions: list[Action] = []
-
-            # On boucle les actions
-            for action in JsonNames.get_command_actions(data):
-                class_name: str = JsonNames.get_command_action_class(action)
-                class_args: dict[str, object] = JsonNames.get_command_action_args(action)
-                
-                # On essaye de récupére la classe de l'action
-                action_class: Action = action_links.get(class_name, None)
-                if action_class is None:
-                    print("Nom de la classe introuvable")
-                    return False
-
-                # On essaye d'instancier et de sauvegarder les données de l'action
-                action: Action = action_class(self)
-                if not action.save_datas(class_args):
-                    print("Impossible d'enregistrer des arguments")
-                    return False
-
-                # On ajoute l'action à la liste des actions
-                command_actions.append(action)
-
-            # Si la commande éxiste déjà on retourne
-            if command_shortcut in self.commands: return False
-
-            # On crée et ajoute la commande à la liste des commandes
-            command: Command = Command(command_name, command_shortcut, command_actions)
-            self.commands[command_shortcut] = command
 
         # Succès
         return True

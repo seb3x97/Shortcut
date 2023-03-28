@@ -1,0 +1,15 @@
+{
+    "name": "action",
+    "commands": [
+        {
+            "name": "LeaveAction",
+            "shortcut": [27],
+            "actions": [
+                {
+                    "class": "change_mod",
+                    "args": {}
+                }
+            ]
+        }
+    ]
+}

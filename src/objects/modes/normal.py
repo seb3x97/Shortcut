@@ -13,6 +13,9 @@ class ModeNormal(Mode.Mode):
         # Parent
         super().__init__(handler)
 
+        # Default
+        self.path_config = Paths.
+
     # On initialise les variables
     def init(self) -> bool:
         # Succès

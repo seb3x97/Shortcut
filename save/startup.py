@@ -1,17 +1,17 @@
 #---------- Locals ----------#
 
 # Managers
-from src.objects.managers.keyboard import ManagerKeyboard
-from src.objects.managers.mouse import ManagerMouse
+import src.objects.managers.keyboard as Keyboard
+import src.objects.managers.mouse as Mouse
 
 # Command
-from src.objects.command.command import Command
-from src.objects.actions.action import Action
-from src.objects.actions.link import action_links
+import src.objects.command.command as Command
+import src.objects.actions.action as Action
+import src.objects.actions.link as Link
 
 # Modes
-from src.objects.modes.mode import Mode
-from src.objects.enums.mode_type import ModeType, MODES
+import src.objects.modes.mode as Mode
+import src.objects.enums.mode_type as ModeType
 
 # Utils
 import src.utils.utils as Utils
@@ -23,18 +23,18 @@ class Startup():
     # Default Constructor
     def __init__(self) -> None:
         # -- Default -- #
-        self.keyboard_manager: ManagerKeyboard = ManagerKeyboard()          # Manager du clavier
-        self.mouse_manager: ManagerMouse = ManagerMouse()                   # Manager de la souris
+        self.keyboard_manager: Keyboard.ManagerKeyboard = Keyboard.ManagerKeyboard()        # Manager du clavier
+        self.mouse_manager: Mouse.ManagerMouse = Mouse.ManagerMouse()                       # Manager de la souris
         #
-        self.modes: dict[ModeType, Mode] = {}                               # Dictionnaire de tous les modes
-        self.mode: Mode = None                                              # Mode actuel
+        self.modes: dict[ModeType.ModeType, Mode.Mode] = {}                                 # Dictionnaire de tous les modes
+        self.mode: Mode = None                                                              # Mode actuel
         #
-        self.commands: dict[tuple, Command] = {}                            # Liste des commandes
+        self.commands: dict[tuple, Command.Command] = {}                                    # Liste des commandes
 
     # On initialise la classe
     def init(self) -> bool:
         # On enregistre les modes
-        self.modes = {key: MODES[key](self) for key in MODES}
+        self.modes = {key: value(self) for key, value in ModeType.MODES.items()}
 
         # On essaye de lire les données des commandes
         if not self.get_commands(): return False
@@ -47,7 +47,7 @@ class Startup():
         # On essaye de faire démarrer les managers
         if not self.keyboard_manager.start(): return False
         if not self.mouse_manager.start(): return False
-        if not self.change_mode(ModeType.NORMAL): return False
+        if not self.change_mode(ModeType.ModeType.NORMAL): return False
 
         # Succès
         return True
@@ -78,7 +78,7 @@ class Startup():
         for data in datas:
             command_name: str = JsonNames.get_command_name(data)
             command_shortcut: tuple = JsonNames.get_command_shortcut(data)
-            command_actions: list[Action] = []
+            command_actions: list[Action.Action] = []
 
             # On boucle les actions
             for action in JsonNames.get_command_actions(data):
@@ -86,7 +86,7 @@ class Startup():
                 class_args: dict[str, object] = JsonNames.get_command_action_args(action)
                 
                 # On essaye de récupére la classe de l'action
-                action_class: Action = action_links.get(class_name, None)
+                action_class: Action = Link.action_links.get(class_name, None)
                 if action_class is None:
                     print("Nom de la classe introuvable")
                     return False

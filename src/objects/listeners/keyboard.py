@@ -88,6 +88,8 @@ class ListenerKeyboard(Listener.Listener):
         code: int = self.get_vk_code(key=key)
         if code is None: return
 
+        print(code)
+
         # On trigger l'event "press"
         if not self.on_press is None: self.on_press(code)
 

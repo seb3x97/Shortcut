@@ -5,6 +5,7 @@ import pynput.mouse as py_mouse
 
 #---------- Locals ----------#
 
+import src.utils.paths as Paths
 import src.objects.modes.mode as Mode
 
 # Class ModeCreative
@@ -13,6 +14,9 @@ class ModeCreative(Mode.Mode):
     def __init__(self, handler):
         # Parent
         super().__init__(handler)
+
+        # Default
+        self.path_config = Paths.FILE_CONFIG_MODE_CREATIVE
 
     # On initialise les variables
     def init(self) -> bool:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 #---------- Locals ----------#
 
+import src.utils.paths as Paths
 import src.objects.modes.mode as Mode
 import src.objects.command.command as Command
 
@@ -15,6 +16,7 @@ class ModeAction(Mode.Mode):
         super().__init__(handler)
 
         # Default
+        self.path_config = Paths.FILE_CONFIG_MODE_ACTION
         self.__command: Command.Command = None
 
     # On initialise les variables

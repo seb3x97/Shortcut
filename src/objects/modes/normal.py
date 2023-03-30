@@ -4,6 +4,7 @@ from __future__ import annotations
 
 #---------- Locals ----------#
 
+import src.utils.paths as Paths
 import src.objects.modes.mode as Mode
 
 # Class ModeNormal
@@ -14,7 +15,7 @@ class ModeNormal(Mode.Mode):
         super().__init__(handler)
 
         # Default
-        self.path_config = Paths.
+        self.path_config = Paths.FILE_CONFIG_MODE_NORMAL
 
     # On initialise les variables
     def init(self) -> bool:
@@ -35,7 +36,7 @@ class ModeNormal(Mode.Mode):
         code: tuple = tuple(codes)
 
         # Si le raccourci éxiste dans la liste des commandes on charge l'action
-        if new and (code in self._handler.commands): self.load_action(code)
+        if new and (code in self.commands): self.load_action(code)
 
 
     #---------- Functions ----------#
@@ -44,7 +45,7 @@ class ModeNormal(Mode.Mode):
     def load_action(self, code: tuple) -> bool:
         from src.objects.enums.mode_type import ModeType
         # On essaye de mettre le mode action
-        if not self._handler.start_mode(ModeType.ACTION, [self._handler.commands[code]]):
+        if not self._handler.start_mode(ModeType.ACTION, [self.commands[code]]):
             print("Impossible de changer de mode")
             return False
 

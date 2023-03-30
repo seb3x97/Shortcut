@@ -12,7 +12,7 @@
             ]
         },
         {
-            "name": "Wait",
+            "name": "Sleep",
             "shortcut": [162, 165, 87],
             "actions": [
                 {

@@ -24,22 +24,20 @@ class Mode():
     def __init__(self, handler: Handler.Handler) -> None:
         # Default
         self.thread: CustomThread.CustomThread = None
-        #
-        self.commands: dict[tuple, Command.Command] = {}                            # Liste des commandes
+        
+        # Liste des commandes
+        self.commands: dict[tuple, Command.Command] = {}
 
         # On enregistre
         self._handler: Handler.Handler = handler
-
-    # On initialise le mode
-    def init(self) -> bool:
-
-        # Succès
-        return True
 
     # On démarre le mode
     def start(self) -> bool:
         # Check si il n'y a pas de processus en court
         if not self.thread is None and self.thread.is_alive(): return False
+
+        # On essaye de récupérer les commandes
+        if not self.retrieve_commands(): return False
 
         # On démarre le thread
         self.thread = CustomThread.CustomThread(target=self.exec, args=())
@@ -56,11 +54,14 @@ class Mode():
         # On termine le thread
         self.thread.stop()
 
+        # On supprime les anciennes commandes
+        self.commands.clear()
+
         # Succès
         return True
     
     # On récupére les données (json)
-    def get_commands(self) -> bool:
+    def retrieve_commands(self) -> bool:
         # Checks si le chemin du fichier éxiste
         if not self.path_config: return False
 
@@ -72,11 +73,8 @@ class Mode():
         datas: dict = Utils.convert_text_to_json(content)
         if datas is None: return False
 
-        # On supprime les anciennes commandes
-        self.commands.clear()
-
         # On boucle les commandes
-        for data in datas:
+        for data in datas['commands']:
             command_name: str = JsonNames.get_command_name(data)
             command_shortcut: tuple = JsonNames.get_command_shortcut(data)
             command_actions: list[Action.Action] = []
@@ -105,7 +103,7 @@ class Mode():
             if command_shortcut in self.commands: return False
 
             # On crée et ajoute la commande à la liste des commandes
-            command: Command.Command = Command(command_name, command_shortcut, command_actions)
+            command: Command.Command = Command.Command(command_name, command_shortcut, command_actions)
             self.commands[command_shortcut] = command
 
         # Succès

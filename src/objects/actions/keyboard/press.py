@@ -1,9 +1,13 @@
+#---------- Package ----------#
+
+from __future__ import annotations
+
 #---------- Locals ----------#
 
-from src.objects.actions.action import Action
+import src.objects.actions.action as action
 
 # Class ActionKeyboardPress
-class ActionKeyboardPress(Action):
+class ActionKeyboardPress(action.Action):
     # Constructeur Renseigné
     def __init__(self, handler) -> None:
         # Parent

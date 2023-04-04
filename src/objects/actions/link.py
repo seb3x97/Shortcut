@@ -1,44 +1,50 @@
+#---------- Package ----------#
+
+from __future__ import annotations
+
 #---------- Locals ----------#
 
 # Keyboard
-from src.objects.actions.keyboard.press import ActionKeyboardPress
-from src.objects.actions.keyboard.release import ActionKeyboardRelease
-from src.objects.actions.keyboard.tap import ActionKeyboardTap
-from src.objects.actions.keyboard.type import ActionKeyboardType
+import src.objects.actions.keyboard.press as press
+import src.objects.actions.keyboard.release as release
+import src.objects.actions.keyboard.tap as tap
+import src.objects.actions.keyboard.type as type
 
 # Mouse
-from src.objects.actions.mouse.click import ActionMouseClick
-from src.objects.actions.mouse.move_to import ActionMouseMoveTo
-from src.objects.actions.mouse.move import ActionMouseMove
-from src.objects.actions.mouse.scroll import ActionMouseScroll
+import src.objects.actions.mouse.click as click
+import src.objects.actions.mouse.move_to as move_to
+import src.objects.actions.mouse.move as move
+import src.objects.actions.mouse.scroll as scroll
 
 # Mode
-from src.objects.actions.mode.creative import ActionModeCreative
+import src.objects.actions.mode.normal as normal
+import src.objects.actions.mode.creative as creative
 
 # Other
-from src.objects.actions.other.draw import ActionOtherDraw
-from src.objects.actions.other.sleep import ActionOtherSleep
-from src.objects.actions.other.update import ActionOtherUpdate
+import src.objects.actions.other.draw as draw
+import src.objects.actions.other.sleep as sleep
+import src.objects.actions.other.update as update
 
 # Liste des liens des actions
 action_links = {
     # Keyboard
-    'keyboard_press': ActionKeyboardPress,
-    'keyboard_release': ActionKeyboardRelease,
-    'keyboard_tap': ActionKeyboardTap,
-    'keyboard_type': ActionKeyboardType,
+    'keyboard_press': press.ActionKeyboardPress,
+    'keyboard_release': release.ActionKeyboardRelease,
+    'keyboard_tap': tap.ActionKeyboardTap,
+    'keyboard_type': type.ActionKeyboardType,
 
     # Mouse
-    'mouse_click': ActionMouseClick,
-    'mouse_move_to': ActionMouseMoveTo,
-    'mouse_move': ActionMouseMove,
-    'mouse_scroll': ActionMouseScroll,
+    'mouse_click': click.ActionMouseClick,
+    'mouse_move_to': move_to.ActionMouseMoveTo,
+    'mouse_move': move.ActionMouseMove,
+    'mouse_scroll': scroll.ActionMouseScroll,
 
     # Mode
-    'mode_creation': ActionModeCreative,
+    'mode_normal': normal.ActionModeNormal,
+    'mode_creation': creative.ActionModeCreative,
 
     # Other
-    'other_draw': ActionOtherDraw,
-    'other_sleep': ActionOtherSleep,
-    'other_update': ActionOtherUpdate,
+    'other_draw': draw.ActionOtherDraw,
+    'other_sleep': sleep.ActionOtherSleep,
+    'other_update': update.ActionOtherUpdate,
 }

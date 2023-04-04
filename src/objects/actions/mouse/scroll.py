@@ -1,9 +1,13 @@
+#---------- Package ----------#
+
+from __future__ import annotations
+
 #---------- Locals ----------#
 
-from src.objects.actions.action import Action
+import src.objects.actions.action as action
 
 # Class ActionMouseScroll
-class ActionMouseScroll(Action):
+class ActionMouseScroll(action.Action):
     # Constructeur Renseigné
     def __init__(self, handler) -> None:
         # Parent

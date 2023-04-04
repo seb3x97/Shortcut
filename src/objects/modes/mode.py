@@ -10,7 +10,6 @@ import src.utils.custom_thread as CustomThread
 
 # Utils
 import src.utils.utils as Utils
-import src.utils.paths as Paths
 import src.utils.json_names as JsonNames
 
 # Command

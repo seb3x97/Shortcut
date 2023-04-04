@@ -1,21 +1,22 @@
 #---------- Package ----------#
 
-from pynput import mouse
+from __future__ import annotations
+import pynput.mouse as py_mouse
 
 #---------- Locals ----------#
 
-from src.objects.actions.action import Action
+import src.objects.actions.action as action
 
 # Class ActionMouseClick
-class ActionMouseClick(Action):
+class ActionMouseClick(action.Action):
     # Constructeur Renseigné
     def __init__(self, handler, btn_value: tuple = (), count: int = 1) -> None:
         # Parent
         super().__init__(handler)
 
         # On enregistre
-        self.button: mouse.Button   = mouse.Button.left
-        self.count: int             = count
+        self.button: py_mouse.Button    = py_mouse.Button.left
+        self.count: int                 = count
 
     # On démarre l'action
     def start(self) -> bool:

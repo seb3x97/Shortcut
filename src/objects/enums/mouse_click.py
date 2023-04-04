@@ -1,9 +1,9 @@
 #---------- Package ----------#
 
-from enum import Enum
-from pynput import mouse
+import enum
+import pynput.mouse as py_mouse
 
 # Class ActionMouseClick
-class ActionMouseClick(Enum):
-    LEFT = mouse.Button.left
-    RIGHT = mouse.Button.right
+class ActionMouseClick(enum.Enum):
+    LEFT = py_mouse.Button.left
+    RIGHT = py_mouse.Button.right

@@ -5,34 +5,31 @@ from __future__ import annotations
 #---------- Locals ----------#
 
 # Managers
-from src.objects.managers.keyboard import ManagerKeyboard
-from src.objects.managers.mouse import ManagerMouse
-
-# Command
-from src.objects.command.command import Command
+import src.objects.managers.keyboard as keyboard
+import src.objects.managers.mouse as mouse
 
 # Modes
-from src.objects.modes.mode import Mode
-from src.objects.enums.mode_type import ModeType, MODES
+import src.objects.modes.mode as mode
+import src.objects.enums.mode_type as mode_type
 
 # Class Handler
 class Handler():
     # Default Constructor
     def __init__(self) -> None:
         # -- Default -- #
-        self.keyboard_manager: ManagerKeyboard = ManagerKeyboard()          # Manager du clavier
-        self.mouse_manager: ManagerMouse = ManagerMouse()                   # Manager de la souris
+        self.keyboard_manager: keyboard.ManagerKeyboard = keyboard.ManagerKeyboard()        # Manager du clavier
+        self.mouse_manager: mouse.ManagerMouse = mouse.ManagerMouse()                       # Manager de la souris
         #
-        self.__modes: dict[ModeType, Mode] = {}                             # Dictionnaire de tous les modes
-        self.mode: Mode = None                                              # Mode actuel
+        self.__modes: dict[mode_type.ModeType, mode.Mode] = {}                              # Dictionnaire de tous les modes
+        self.mode: mode.Mode = None                                                         # Mode actuel
 
     # On initialise la classe
     def init(self) -> bool:
         # On enregistre les modes
-        self.__modes = {key: MODES[key](self) for key in MODES}
+        self.__modes = {key: item(self) for key, item in mode_type.MODES}
 
         # On essaye de lire les données et mettre le mode par défaut
-        if not self.set_mode(ModeType.NORMAL): return False
+        if not self.set_mode(mode_type.ModeType.NORMAL): return False
 
         # Succès
         return True
@@ -57,7 +54,7 @@ class Handler():
         return True
 
     # On enregistre le mode (en le démarrant)
-    def start_mode(self, mode_type: ModeType = ModeType.NORMAL, args: tuple = ()) -> bool:
+    def start_mode(self, mode_type: mode_type.ModeType = mode_type.ModeType.NORMAL, args: tuple = ()) -> bool:
         # On essaye d'initialiser le mode
         if not self.set_mode(mode_type, args): return False
 
@@ -68,7 +65,7 @@ class Handler():
         return True
 
     # On enregistre le mode (sans le démarrer)
-    def set_mode(self, mode_type: ModeType, args: tuple = ()) -> bool:
+    def set_mode(self, mode_type: mode_type.ModeType, args: tuple = ()) -> bool:
         # On stop l'ancien mode
         if not self.mode is None: self.mode.stop()
 

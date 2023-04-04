@@ -1,16 +1,18 @@
 #---------- Package ----------#
 
+from __future__ import annotations
+#
 import time
 from PIL import Image
 from pynput import mouse
 
 #---------- Locals ----------#
 
-from src.objects.actions.action import Action
-from src.objects.enums.virtual_keys import VirtualKeys
+import src.objects.actions.action as action
+import src.objects.enums.virtual_keys as virtual_keys
 
 # Class ActionOtherDraw
-class ActionOtherDraw(Action):
+class ActionOtherDraw(action.Action):
     # Constructeur Renseigné
     def __init__(self, handler) -> None:
         # Parent
@@ -70,7 +72,7 @@ class ActionOtherDraw(Action):
                 text = str(color[i])
                 for char in text:
                     vk_name = f"VK_{char}"
-                    value = VirtualKeys[vk_name].value
+                    value = virtual_keys.VirtualKeys[vk_name].value
                     self._handler.keyboard_manager.tap(value)
                     time.sleep(0.1)
 

@@ -5,22 +5,19 @@ from __future__ import annotations
 #---------- Locals ----------#
 
 import src.objects.actions.action as action
+import src.objects.enums.mode_type as mode_type
 
-# Class ActionMouseMoveTo
-class ActionMouseMoveTo(action.Action):
+# Class ActionModeNormal
+class ActionModeNormal(action.Action):
     # Constructeur Renseigné
-    def __init__(self, handler, x: int = 0, y: int = 0) -> None:
+    def __init__(self, handler) -> None:
         # Parent
         super().__init__(handler)
 
-        # On enregistre
-        self.x: int = x
-        self.y: int = y
-
     # On démarre l'action
     def start(self) -> bool:
-        # Action => MoveTo
-        self._handler.mouse_manager.move_to(self.x, self.y)
+        # On essaye de changer le mode
+        if not self._handler.start_mode(mode_type=mode_type.ModeType.NORMAL): return False
 
         # Succès
         return True

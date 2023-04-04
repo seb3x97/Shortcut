@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import src.utils.paths as Paths
 import src.objects.modes.mode as Mode
+import src.objects.enums.mode_type as mode_type
 
 # Class ModeNormal
 class ModeNormal(Mode.Mode):
@@ -43,9 +44,8 @@ class ModeNormal(Mode.Mode):
 
     # On essaye de charger une action
     def load_action(self, code: tuple) -> bool:
-        from src.objects.enums.mode_type import ModeType
         # On essaye de mettre le mode action
-        if not self._handler.start_mode(ModeType.ACTION, [self.commands[code]]):
+        if not self._handler.start_mode(mode_type.ModeType.ACTION, [self.commands[code]]):
             print("Impossible de changer de mode")
             return False
 

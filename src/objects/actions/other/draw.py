@@ -3,8 +3,8 @@
 from __future__ import annotations
 #
 import time
-from PIL import Image
-from pynput import mouse
+import PIL.Image as Image
+import pynput.mouse as py_mouse
 
 #---------- Locals ----------#
 
@@ -54,7 +54,7 @@ class ActionOtherDraw(action.Action):
             positions = colors[color]
 
             self._handler.mouse_manager.move_to(3040, 69)
-            self._handler.mouse_manager.click(mouse.Button.left, 2)
+            self._handler.mouse_manager.click(py_mouse.Button.left, 2)
             time.sleep(1)
 
             POSITIONS = [
@@ -66,7 +66,7 @@ class ActionOtherDraw(action.Action):
             for i in range(len(color)):
                 x, y = POSITIONS[i]
                 self._handler.mouse_manager.move_to(x, y)
-                self._handler.mouse_manager.click(mouse.Button.left, 2)
+                self._handler.mouse_manager.click(py_mouse.Button.left, 2)
                 time.sleep(0.1)
 
                 text = str(color[i])
@@ -77,14 +77,14 @@ class ActionOtherDraw(action.Action):
                     time.sleep(0.1)
 
             self._handler.mouse_manager.move_to(2695, 665)
-            self._handler.mouse_manager.click(mouse.Button.left, 2)
+            self._handler.mouse_manager.click(py_mouse.Button.left, 2)
             time.sleep(0.1)
 
             count = 0
             for position in positions:
                 x, y = position
                 self._handler.mouse_manager.move_to(init_x + x, init_y + y)
-                self._handler.mouse_manager.click(mouse.Button.left, 1)
+                self._handler.mouse_manager.click(py_mouse.Button.left, 1)
                 time.sleep(0.001)
 
                 count += 1

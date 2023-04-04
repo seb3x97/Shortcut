@@ -1,3 +1,7 @@
+#---------- Package ----------#
+
+from __future__ import annotations
+
 # Class Manager
 class Manager():
     # Default Constructor

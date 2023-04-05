@@ -18,8 +18,8 @@ class ModeCreative(Mode.Mode):
         # Default
         self.path_config = Paths.FILE_CONFIG_MODE_CREATIVE
 
-    # On initialise les variables
-    def init(self) -> bool:
+    # On sauvegarde les arguments
+    def set_args(self) -> bool:
         # Succès
         return True
     

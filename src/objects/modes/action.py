@@ -19,8 +19,8 @@ class ModeAction(Mode.Mode):
         self.path_config = Paths.FILE_CONFIG_MODE_ACTION
         self.__command: Command.Command = None
 
-    # On initialise les variables
-    def init(self, command: Command.Command) -> bool:
+    # On sauvegarde les arguments
+    def set_args(self, command: Command.Command) -> bool:
         # On enregistre
         self.__command = command
 

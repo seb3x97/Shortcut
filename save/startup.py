@@ -27,7 +27,7 @@ class Startup():
         self.mouse_manager: Mouse.ManagerMouse = Mouse.ManagerMouse()                       # Manager de la souris
         #
         self.modes: dict[ModeType.ModeType, Mode.Mode] = {}                                 # Dictionnaire de tous les modes
-        self.mode: Mode = None                                                              # Mode actuel
+        self.mode: Mode.Mode = None                                                         # Mode actuel
         #
         self.commands: dict[tuple, Command.Command] = {}                                    # Liste des commandes
 
@@ -86,13 +86,13 @@ class Startup():
                 class_args: dict[str, object] = JsonNames.get_command_action_args(action)
                 
                 # On essaye de récupére la classe de l'action
-                action_class: Action = Link.action_links.get(class_name, None)
+                action_class: Action.Action = Link.action_links.get(class_name, None)
                 if action_class is None:
                     print("Nom de la classe introuvable")
                     return False
 
                 # On essaye d'instancier et de sauvegarder les données de l'action
-                action: Action = action_class(self)
+                action: Action.Action = action_class(self)
                 if not action.save_datas(class_args):
                     print("Impossible d'enregistrer des arguments")
                     return False
@@ -111,7 +111,7 @@ class Startup():
         return True
 
     # On enregistre le mode
-    def change_mode(self, mode_type: ModeType, args: tuple = ()) -> bool:
+    def change_mode(self, mode_type: ModeType.ModeType, args: tuple = ()) -> bool:
         # On stop l'ancien mode
         if not self.mode is None: self.mode.stop()
 

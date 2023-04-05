@@ -5,11 +5,11 @@ from __future__ import annotations
 #---------- Locals ----------#
 
 import src.utils.paths as Paths
-import src.objects.modes.mode as Mode
+import src.objects.modes.mode as mode
 import src.objects.enums.mode_type as mode_type
 
 # Class ModeNormal
-class ModeNormal(Mode.Mode):
+class ModeNormal(mode.Mode):
     # Default Constructor
     def __init__(self, handler):
         # Parent
@@ -18,11 +18,11 @@ class ModeNormal(Mode.Mode):
         # Default
         self.path_config = Paths.FILE_CONFIG_MODE_NORMAL
 
-    # On initialise les variables
-    def init(self) -> bool:
+    # On sauvegarde les arguments
+    def set_args(self) -> bool:
         # Succès
         return True
-    
+
     # On éxécute les sous-tâches du mode
     def exec(self) -> bool:
         # Succès

@@ -1,6 +1,15 @@
 {
     "name": "creative",
     "commands": [
-        
+        {
+            "name": "LeaveAction",
+            "shortcut": [27],
+            "actions": [
+                {
+                    "class": "mode_normal",
+                    "args": {}
+                }
+            ]
+        }
     ]
 }

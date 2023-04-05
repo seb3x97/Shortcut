@@ -22,6 +22,7 @@ class ActionOtherSleep(action.Action):
         # Si un signal arrive pendant la pause, on ne fini pas la pause et on continue le code
         print("we")
         self._handler.mode.thread.wait(self.secs)
+        print("end")
 
         # Succès
         return True

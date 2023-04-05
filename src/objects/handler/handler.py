@@ -26,7 +26,18 @@ class Handler():
     # On initialise la classe
     def init(self) -> bool:
         # On enregistre les modes
-        self.__modes = {key: item(self) for key, item in mode_type.MODES}
+        self.__modes = {key: item(self) for key, item in mode_type.MODES.items()}
+
+        # On récupére la liste des modes
+        for key, item in mode_type.MODES.items():
+            # On essaye de charger le mode
+            instance: mode.Mode = item(self)
+            if not instance.init():
+                print(f"Une erreure est survenue l'hors du chargement du mode '{item.__class__.__name__}'")
+                break
+
+            # On enregistre le mode
+            self.__modes[key] = instance
 
         # On essaye de lire les données et mettre le mode par défaut
         if not self.set_mode(mode_type.ModeType.NORMAL): return False
@@ -53,17 +64,6 @@ class Handler():
         # Succès
         return True
 
-    # On enregistre le mode (en le démarrant)
-    def start_mode(self, mode_type: mode_type.ModeType = mode_type.ModeType.NORMAL, args: tuple = ()) -> bool:
-        # On essaye d'initialiser le mode
-        if not self.set_mode(mode_type, args): return False
-
-        # On essaye de démarrer le mode
-        if not self.mode.start(): return False
-
-        # Succès
-        return True
-
     # On enregistre le mode (sans le démarrer)
     def set_mode(self, mode_type: mode_type.ModeType, args: tuple = ()) -> bool:
         # On stop l'ancien mode
@@ -72,7 +72,7 @@ class Handler():
         # On essaye d'enregistrer le nouveau mode et de l'initialiser
         self.mode = self.__modes.get(mode_type, None)
         if self.mode is None: return False
-        if not self.mode.init(*args): return False
+        if not self.mode.set_args(*args): return False
 
         # Events du clavier
         self.keyboard_manager.on_press = self.mode.on_press
@@ -83,6 +83,17 @@ class Handler():
         self.mouse_manager.on_move = self.mode.on_move
         self.mouse_manager.on_click = self.mode.on_click
         self.mouse_manager.on_scroll = self.mode.on_scroll
+
+        # Succès
+        return True
+    
+    # On enregistre le mode (en le démarrant)
+    def start_mode(self, mode_type: mode_type.ModeType = mode_type.ModeType.NORMAL, args: tuple = ()) -> bool:
+        # On essaye d'initialiser le mode
+        if not self.set_mode(mode_type, args): return False
+
+        # On essaye de démarrer le mode
+        if not self.mode.start(): return False
 
         # Succès
         return True

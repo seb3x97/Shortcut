@@ -6,7 +6,7 @@
             "shortcut": [27],
             "actions": [
                 {
-                    "class": "change_mod",
+                    "class": "mode_normal",
                     "args": {}
                 }
             ]

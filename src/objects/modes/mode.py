@@ -30,13 +30,18 @@ class Mode():
         # On enregistre
         self._handler: Handler.Handler = handler
 
+    # On initialise le mode
+    def init(self) -> bool:
+        # On essaye de récupérer les commandes
+        if not self.retrieve_commands(): return False
+
+        # Succès
+        return True
+
     # On démarre le mode
     def start(self) -> bool:
         # Check si il n'y a pas de processus en court
         if not self.thread is None and self.thread.is_alive(): return False
-
-        # On essaye de récupérer les commandes
-        if not self.retrieve_commands(): return False
 
         # On démarre le thread
         self.thread = CustomThread.CustomThread(target=self.exec, args=())
@@ -62,7 +67,9 @@ class Mode():
     # On récupére les données (json)
     def retrieve_commands(self) -> bool:
         # Checks si le chemin du fichier éxiste
-        if not self.path_config: return False
+        if not self.path_config:
+            print(f"Le mode actuel n'a pas de chemin de config")
+            return False
 
         # On essaye de récupérer le contenu du fichier
         content: str = Utils.read_file_content(self.path_config)
@@ -74,44 +81,64 @@ class Mode():
 
         # On boucle les commandes
         for data in datas['commands']:
+            # On récupére les données dans la commande
             command_name: str = JsonNames.get_command_name(data)
             command_shortcut: tuple = JsonNames.get_command_shortcut(data)
-            command_actions: list[Action.Action] = []
+            command_actions = JsonNames.get_command_actions(data)
 
-            # On boucle les actions
-            for action in JsonNames.get_command_actions(data):
-                class_name: str = JsonNames.get_command_action_class(action)
-                class_args: dict[str, object] = JsonNames.get_command_action_args(action)
-                
-                # On essaye de récupére la classe de l'action
-                action_class: Action = Link.action_links.get(class_name, None)
-                if action_class is None:
-                    print("Nom de la classe introuvable")
-                    return False
-
-                # On essaye d'instancier et de sauvegarder les données de l'action
-                action: Action.Action = action_class(self)
-                if not action.save_datas(class_args):
-                    print("Impossible d'enregistrer des arguments")
-                    return False
-
-                # On ajoute l'action à la liste des actions
-                command_actions.append(action)
-
-            # Si la commande éxiste déjà on retourne
-            if command_shortcut in self.commands: return False
+            # Si la commande éxiste déjà
+            if command_shortcut in self.commands:
+                print(f"Doublon de la commande '{command_name}'")
+                break
 
             # On crée et ajoute la commande à la liste des commandes
-            command: Command.Command = Command.Command(command_name, command_shortcut, command_actions)
+            command: Command.Command = self.convert_command_data_to_class(command_name, command_shortcut, command_actions)
+            if command is None:
+                print(f"Une erreur est survenue l'hors du chargement de la commande '{command}'")
+                break
+
+            # On enregistre la commande
             self.commands[command_shortcut] = command
 
         # Succès
         return True
     
+    # On convertit les données d'une commande en un classe
+    def convert_command_data_to_class(self, command_name: str, command_shortcut: tuple, command_actions: list) -> Command.Command:
+        # Données
+        name: str = command_name
+        shortcut: tuple = command_shortcut
+        actions: list[Action.Action] = []
+
+        # On boucle les actions
+        for action in command_actions:
+            # On récupére les données de l'action
+            class_name: str = JsonNames.get_command_action_class(action)
+            class_args: dict[str, object] = JsonNames.get_command_action_args(action)
+            
+            # On essaye de récupére la classe de l'action
+            action_class: Action = Link.action_links.get(class_name, None)
+            if action_class is None:
+                print("Nom de la classe introuvable")
+                return None
+
+            # On essaye d'instancier et de sauvegarder les données de l'action
+            action: Action.Action = action_class(self._handler)
+            if not action.save_datas(class_args):
+                print("Impossible d'enregistrer des arguments")
+                return None
+
+            # On ajoute l'action à la liste des actions
+            actions.append(action)
+
+        # Succès
+        return Command.Command(name, shortcut, actions)
+
+    
     # -- Abstract Function -- #
 
     # Execution du code
-    def init(): raise NotImplementedError()
+    def set_args(): raise NotImplementedError()
     def exec(): raise NotImplementedError()
 
     # Events du clavier

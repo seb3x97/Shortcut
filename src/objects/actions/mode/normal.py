@@ -5,7 +5,6 @@ from __future__ import annotations
 #---------- Locals ----------#
 
 import src.objects.actions.action as action
-import src.objects.enums.mode_type as mode_type
 
 # Class ActionModeNormal
 class ActionModeNormal(action.Action):
@@ -17,7 +16,8 @@ class ActionModeNormal(action.Action):
     # On démarre l'action
     def start(self) -> bool:
         # On essaye de changer le mode
-        if not self._handler.start_mode(mode_type=mode_type.ModeType.NORMAL): return False
+        import src.objects.enums.mode_type as ModeType
+        if not self._handler.start_mode(mode_type=ModeType.ModeType.NORMAL): return False
 
         # Succès
         return True

@@ -2,6 +2,26 @@
     "name": "normal",
     "commands": [
         {
+            "name": "Debug",
+            "shortcut": [162, 165, 68],
+            "actions": [
+                {
+                    "class": "other_debug",
+                    "args": {}
+                }
+            ]
+        },
+        {
+            "name": "Creative",
+            "shortcut": [162, 165, 67],
+            "actions": [
+                {
+                    "class": "mode_creative",
+                    "args": {}
+                }
+            ]
+        },
+        {
             "name": "Draw",
             "shortcut": [162, 160, 76],
             "actions": [

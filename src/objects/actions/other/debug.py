@@ -6,8 +6,8 @@ from __future__ import annotations
 
 import src.objects.actions.action as action
 
-# Class ActionModeCreative
-class ActionModeCreative(action.Action):
+# Class ActionOtherDebug
+class ActionOtherDebug(action.Action):
     # Constructeur Renseigné
     def __init__(self, handler) -> None:
         # Parent
@@ -15,9 +15,11 @@ class ActionModeCreative(action.Action):
 
     # On démarre l'action
     def start(self) -> bool:
-        # On essaye de changer le mode
-        import src.objects.enums.mode_type as ModeType
-        if not self._handler.start_mode(mode_type=ModeType.ModeType.CREATIVE): return False
+        # Check si le mode est défini
+        if self._handler.mode is None: return False
+
+        # Affichage du nom de la classe
+        print("Todo: trouver une utilité ?")
 
         # Succès
         return True

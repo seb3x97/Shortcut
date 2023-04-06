@@ -17,12 +17,12 @@ class ModeAction(Mode.Mode):
 
         # Default
         self.path_config = Paths.FILE_CONFIG_MODE_ACTION
-        self.__command: Command.Command = None
+        self.command: Command.Command = None
 
     # On sauvegarde les arguments
     def set_args(self, command: Command.Command) -> bool:
         # On enregistre
-        self.__command = command
+        self.command = command
 
         # Succès
         return True
@@ -30,10 +30,10 @@ class ModeAction(Mode.Mode):
     # On éxécute les sous-tâches du mode
     def exec(self) -> bool:
         # Check si il n'y a pas de commande
-        if self.__command is None: return False
+        if self.command is None: return False
 
         # On boucle les actions pour les démarrer
-        for action in self.__command.actions:
+        for action in self.command.actions:
             action.start()
 
         # On recharge le mode normal
@@ -50,8 +50,5 @@ class ModeAction(Mode.Mode):
         # On récupére le code unique
         code: tuple = tuple(codes)
 
-        default_actions = {
-            (27,): self._handler.start_mode
-        }
-
-        if code in default_actions: default_actions.get(code)()
+        # Si le raccourci éxiste dans la liste des commandes on charge l'action
+        if new and (code in self._commands): self.load_action(code)

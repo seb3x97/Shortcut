@@ -21,6 +21,7 @@ import src.objects.actions.mode.normal as normal
 import src.objects.actions.mode.creative as creative
 
 # Other
+import src.objects.actions.other.debug as debug
 import src.objects.actions.other.draw as draw
 import src.objects.actions.other.sleep as sleep
 import src.objects.actions.other.update as update
@@ -41,9 +42,10 @@ action_links = {
 
     # Mode
     'mode_normal': normal.ActionModeNormal,
-    'mode_creation': creative.ActionModeCreative,
+    'mode_creative': creative.ActionModeCreative,
 
     # Other
+    'other_debug': debug.ActionOtherDebug,
     'other_draw': draw.ActionOtherDraw,
     'other_sleep': sleep.ActionOtherSleep,
     'other_update': update.ActionOtherUpdate,

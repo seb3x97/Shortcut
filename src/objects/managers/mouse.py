@@ -1,7 +1,7 @@
 #---------- Package ----------#
 
 from __future__ import annotations
-import pynput
+import pynput.mouse as py_mouse
 
 #---------- Locals ----------#
 
@@ -59,7 +59,7 @@ class ManagerMouse(Manager.Manager):
         self.__enable_events = True
 
     # On click avec la souris
-    def click(self, button: pynput.mouse.Button, count: int = 1):
+    def click(self, button: py_mouse.Button, count: int = 1):
         self.__enable_events = False
         self.__mouse_listener.click(button=button, count=count)
         self.__enable_events = True
@@ -89,7 +89,7 @@ class ManagerMouse(Manager.Manager):
         if not self.on_move is None: self.on_move(x, y)
 
     # Event quand on clique avec la souris
-    def __on_click(self, x: int, y: int, button: mouse.Button, pressed: bool):
+    def __on_click(self, x: int, y: int, button: py_mouse.Button, pressed: bool):
         # Check si les evenements sont activés
         if not self.__enable_events: return
 

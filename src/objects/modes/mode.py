@@ -25,7 +25,7 @@ class Mode():
         self.thread: CustomThread.CustomThread = None
         
         # Liste des commandes
-        self.commands: dict[tuple, Command.Command] = {}
+        self._commands: dict[tuple, Command.Command] = {}
 
         # On enregistre
         self._handler: Handler.Handler = handler
@@ -59,7 +59,7 @@ class Mode():
         self.thread.stop()
 
         # On supprime les anciennes commandes
-        self.commands.clear()
+        self._commands.clear()
 
         # Succès
         return True
@@ -87,18 +87,18 @@ class Mode():
             command_actions = JsonNames.get_command_actions(data)
 
             # Si la commande éxiste déjà
-            if command_shortcut in self.commands:
-                print(f"Doublon de la commande '{command_name}'")
+            if command_shortcut in self._commands:
+                print(f"Doublon du shortcut de la commande '{command_name}' et la commande '{self._commands.get(command_shortcut).name}'")
                 break
 
             # On crée et ajoute la commande à la liste des commandes
             command: Command.Command = self.convert_command_data_to_class(command_name, command_shortcut, command_actions)
             if command is None:
-                print(f"Une erreur est survenue l'hors du chargement de la commande '{command}'")
+                print(f"Une erreur est survenue l'hors du chargement de la commande '{command_name}'")
                 break
 
             # On enregistre la commande
-            self.commands[command_shortcut] = command
+            self._commands[command_shortcut] = command
 
         # Succès
         return True
@@ -133,8 +133,22 @@ class Mode():
 
         # Succès
         return Command.Command(name, shortcut, actions)
-
     
+
+    #---------- Functions ----------#
+
+    # On essaye de charger une action
+    def load_action(self, code: tuple) -> bool:
+        # On essaye de mettre le mode action
+        import src.objects.enums.mode_type as mode_type
+        if not self._handler.start_mode(mode_type.ModeType.ACTION, [self._commands[code]]):
+            print("Impossible de changer de mode")
+            return False
+
+        # Succès
+        return True
+
+
     # -- Abstract Function -- #
 
     # Execution du code

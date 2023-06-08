@@ -10,16 +10,19 @@ import src.objects.actions.action as action
 # Class ActionMouseClick
 class ActionMouseClick(action.Action):
     # Constructeur Renseigné
-    def __init__(self, handler, btn_value: tuple = (), count: int = 1) -> None:
+    def __init__(self, handler, button: int = None, count: int = None) -> None:
         # Parent
         super().__init__(handler)
 
         # On enregistre
-        self.button: py_mouse.Button    = py_mouse.Button.left
-        self.count: int                 = count
+        self.button: button
+        self.count: count
 
     # On démarre l'action
     def start(self) -> bool:
+        # Check des paramètres
+        if(self.button == None or self.count == None): return False
+
         # Action => click
         self._handler.mouse_manager.click(self.button, self.count)
         

@@ -2,11 +2,11 @@
     "name": "action",
     "commands": [
         {
-            "name": "LeaveAction",
-            "shortcut": [27],
+            "name": "Leave",
+            "shortcut": [162, 165, 27],
             "actions": [
                 {
-                    "class": "mode_normal",
+                    "name": "mode_normal",
                     "args": {}
                 }
             ]

@@ -6,7 +6,21 @@
             "shortcut": [162, 165, 68],
             "actions": [
                 {
-                    "class": "other_debug",
+                    "name": "other_debug",
+                    "args": {}
+                },
+                {
+                    "name": "mode_normal",
+                    "args": {}
+                }
+            ]
+        },
+        {
+            "name": "Leave",
+            "shortcut": [162, 165, 27],
+            "actions": [
+                {
+                    "name": "other_exit",
                     "args": {}
                 }
             ]
@@ -16,7 +30,7 @@
             "shortcut": [162, 165, 67],
             "actions": [
                 {
-                    "class": "mode_creative",
+                    "name": "mode_creative",
                     "args": {}
                 }
             ]
@@ -26,8 +40,12 @@
             "shortcut": [162, 160, 76],
             "actions": [
                 {
-                    "class": "other_draw",
+                    "name": "other_draw",
                     "args": {"src": "C:/Users/svoide/Desktop/Drw2.jpg"}
+                },
+                {
+                    "name": "mode_normal",
+                    "args": {}
                 }
             ]
         },
@@ -36,8 +54,12 @@
             "shortcut": [162, 165, 87],
             "actions": [
                 {
-                    "class": "other_sleep",
+                    "name": "other_sleep",
                     "args": {"secs": 5}
+                },
+                {
+                    "name": "mode_normal",
+                    "args": {}
                 }
             ]
         }

@@ -13,3 +13,6 @@ class Manager():
 
     # On arrête le manager
     def stop(self) -> None: raise NotImplementedError()
+
+    # On join le manager
+    def stop(self) -> None: raise NotImplementedError()

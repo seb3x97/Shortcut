@@ -44,6 +44,13 @@ class ListenerMouse(Listener.Listener):
 
         # Succès
         return True
+    
+    # On join le listener
+    def join(self) -> bool:
+        self.__listener.join()
+
+        # Succès
+        return True
 
 
     #---------- Functions ----------#
@@ -76,9 +83,9 @@ class ListenerMouse(Listener.Listener):
     #---------- Events ----------#
 
     # Event quand on bouge la souris
-    def __on_move(self, x: int, y: int):
+    def __on_move(self, dx: int, dy: int):
         # On trigger l'event move
-        if not self.on_move is None: self.on_move(x, y)
+        if not self.on_move is None: self.on_move(dx, dy)
 
     # Event quand on clique avec la souris
     def __on_click(self, x: int, y: int, button: py_mouse.Button, pressed: bool):

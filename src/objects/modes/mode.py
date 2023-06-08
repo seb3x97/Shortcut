@@ -119,7 +119,7 @@ class Mode():
             # On essaye de récupére la classe de l'action
             action_class: Action = Link.action_links.get(class_name, None)
             if action_class is None:
-                print("Nom de la classe introuvable")
+                print(f"Nom de la classe '{class_name}' introuvable")
                 return None
 
             # On essaye d'instancier et de sauvegarder les données de l'action
@@ -140,7 +140,7 @@ class Mode():
     # On essaye de charger une action
     def load_action(self, code: tuple) -> bool:
         # On essaye de mettre le mode action
-        import src.objects.enums.mode_type as mode_type
+        import src.enums.mode_type as mode_type
         if not self._handler.start_mode(mode_type.ModeType.ACTION, [self._commands[code]]):
             print("Impossible de changer de mode")
             return False
@@ -161,6 +161,6 @@ class Mode():
     def on_shortcut(self, codes: list[int], new: bool): pass
 
     # Events de la souris
-    def on_move(self, x: int, y: int): pass
+    def on_move(self, dx: int, dy: int): pass
     def on_click(self, x: int, y: int, button: py_mouse.Button, pressed: bool): pass
     def on_scroll(self, x: int, y: int, dx: int, dy: int): pass

@@ -32,12 +32,13 @@ class ModeAction(Mode.Mode):
         # Check si il n'y a pas de commande
         if self.command is None: return False
 
+        print(f"Start action {self.__class__.__name__}")
+
         # On boucle les actions pour les démarrer
         for action in self.command.actions:
             action.start()
 
-        # On recharge le mode normal
-        if not self._handler.start_mode(): return False
+        print(f"End action {self.__class__.__name__}")
 
         # Succès
         return True

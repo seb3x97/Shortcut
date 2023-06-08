@@ -16,7 +16,7 @@ class ActionModeCreative(action.Action):
     # On démarre l'action
     def start(self) -> bool:
         # On essaye de changer le mode
-        import src.objects.enums.mode_type as ModeType
+        import src.enums.mode_type as ModeType
         if not self._handler.start_mode(mode_type=ModeType.ModeType.CREATIVE): return False
 
         # Succès

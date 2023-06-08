@@ -10,7 +10,7 @@ import src.objects.modes.normal as normal
 import src.objects.modes.creative as creative
 import src.objects.modes.action as action
 
-# Class ModeType
+# Enum ModeType
 class ModeType(enum.Enum):
     NORMAL      = 10
     CREATIVE    = 20

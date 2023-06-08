@@ -4,6 +4,9 @@ from __future__ import annotations
 
 #---------- Locals ----------#
 
+# Links
+from src.enums.action_links import ActionLinks
+
 # Keyboard
 import src.objects.actions.keyboard.press as press
 import src.objects.actions.keyboard.release as release
@@ -23,30 +26,36 @@ import src.objects.actions.mode.creative as creative
 # Other
 import src.objects.actions.other.debug as debug
 import src.objects.actions.other.draw as draw
+import src.objects.actions.other.exit as exit
 import src.objects.actions.other.sleep as sleep
 import src.objects.actions.other.update as update
+
+import src.objects.actions.other.save_custom as save_custom
 
 # Liste des liens des actions
 action_links = {
     # Keyboard
-    'keyboard_press': press.ActionKeyboardPress,
-    'keyboard_release': release.ActionKeyboardRelease,
-    'keyboard_tap': tap.ActionKeyboardTap,
-    'keyboard_type': type.ActionKeyboardType,
+    ActionLinks.KEYBOARD_PRESS.value: press.ActionKeyboardPress,
+    ActionLinks.KEYBOARD_RELEASE.value: release.ActionKeyboardRelease,
+    ActionLinks.KEYBOARD_TAP.value: tap.ActionKeyboardTap,
+    ActionLinks.KEYBOARD_TYPE.value: type.ActionKeyboardType,
 
     # Mouse
-    'mouse_click': click.ActionMouseClick,
-    'mouse_move_to': move_to.ActionMouseMoveTo,
-    'mouse_move': move.ActionMouseMove,
-    'mouse_scroll': scroll.ActionMouseScroll,
+    ActionLinks.MOUSE_CLICK.value: click.ActionMouseClick,
+    ActionLinks.MOUSE_MOVE_TO.value: move_to.ActionMouseMoveTo,
+    ActionLinks.MOUSE_MOVE.value: move.ActionMouseMove,
+    ActionLinks.MOUSE_SCROLL.value: scroll.ActionMouseScroll,
 
     # Mode
-    'mode_normal': normal.ActionModeNormal,
-    'mode_creative': creative.ActionModeCreative,
+    ActionLinks.MODE_NORMAL.value: normal.ActionModeNormal,
+    ActionLinks.MODE_CREATIVE.value: creative.ActionModeCreative,
 
     # Other
-    'other_debug': debug.ActionOtherDebug,
-    'other_draw': draw.ActionOtherDraw,
-    'other_sleep': sleep.ActionOtherSleep,
-    'other_update': update.ActionOtherUpdate,
+    ActionLinks.OTHER_DEBUG.value: debug.ActionOtherDebug,
+    ActionLinks.OTHER_DRAW.value: draw.ActionOtherDraw,
+    ActionLinks.OTHER_EXIT.value: exit.ActionOtherExit,
+    ActionLinks.OTHER_SLEEP.value: sleep.ActionOtherSleep,
+    ActionLinks.OTHER_UPDATE.value: update.ActionOtherUpdate,
+
+    ActionLinks.OTHER_SAVE_CUSTOM.value: save_custom.ActionOtherSaveCustom,
 }

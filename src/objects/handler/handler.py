@@ -10,7 +10,7 @@ import src.objects.managers.mouse as mouse
 
 # Modes
 import src.objects.modes.mode as mode
-import src.objects.enums.mode_type as mode_type
+import src.enums.mode_type as mode_type
 
 # Class Handler
 class Handler():
@@ -65,7 +65,7 @@ class Handler():
         return True
 
     # On enregistre le mode (sans le démarrer)
-    def set_mode(self, mode_type: mode_type.ModeType, args: tuple = ()) -> bool:
+    def set_mode(self, mode_type: mode_type.ModeType, args: list = []) -> bool:
         # On stop l'ancien mode
         if not self.mode is None: self.mode.stop()
 
@@ -88,7 +88,10 @@ class Handler():
         return True
     
     # On enregistre le mode (en le démarrant)
-    def start_mode(self, mode_type: mode_type.ModeType = mode_type.ModeType.NORMAL, args: tuple = ()) -> bool:
+    def start_mode(self, mode_type: mode_type.ModeType = mode_type.ModeType.NORMAL, args: list = []) -> bool:
+
+        print(f"Start mode {mode_type.name}")
+
         # On essaye d'initialiser le mode
         if not self.set_mode(mode_type, args): return False
 

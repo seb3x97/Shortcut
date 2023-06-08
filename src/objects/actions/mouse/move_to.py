@@ -9,7 +9,7 @@ import src.objects.actions.action as action
 # Class ActionMouseMoveTo
 class ActionMouseMoveTo(action.Action):
     # Constructeur Renseigné
-    def __init__(self, handler, x: int = 0, y: int = 0) -> None:
+    def __init__(self, handler, x: int = None, y: int = None) -> None:
         # Parent
         super().__init__(handler)
 
@@ -19,6 +19,9 @@ class ActionMouseMoveTo(action.Action):
 
     # On démarre l'action
     def start(self) -> bool:
+        # Check des paramètres
+        if(self.x == None or self.y == None): return False
+
         # Action => MoveTo
         self._handler.mouse_manager.move_to(self.x, self.y)
 

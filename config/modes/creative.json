@@ -2,11 +2,21 @@
     "name": "creative",
     "commands": [
         {
-            "name": "LeaveAction",
-            "shortcut": [27],
+            "name": "Leave",
+            "shortcut": [162, 165, 27],
             "actions": [
                 {
-                    "class": "mode_normal",
+                    "name": "mode_normal",
+                    "args": {}
+                }
+            ]
+        },
+        {
+            "name": "SaveCustom",
+            "shortcut": [162, 165, 13],
+            "actions": [
+                {
+                    "name": "other_save_custom",
                     "args": {}
                 }
             ]

@@ -1,0 +1,66 @@
+[
+    {
+        "type": "press",
+        "code": 65
+    },
+    {
+        "class": "other_sleep",
+        "args": {
+            "secs": 2.855338
+        }
+    },
+    {
+        "type": "press",
+        "code": 66
+    },
+    {
+        "class": "other_sleep",
+        "args": {
+            "secs": 2.576087
+        }
+    },
+    {
+        "type": "press",
+        "code": 67
+    },
+    {
+        "class": "other_sleep",
+        "args": {
+            "secs": 1.543857
+        }
+    },
+    {
+        "type": "press",
+        "code": 68
+    },
+    {
+        "class": "other_sleep",
+        "args": {
+            "secs": 0.296205
+        }
+    },
+    {
+        "type": "press",
+        "code": 69
+    },
+    {
+        "class": "other_sleep",
+        "args": {
+            "secs": 0.360034
+        }
+    },
+    {
+        "type": "press",
+        "code": 70
+    },
+    {
+        "class": "other_sleep",
+        "args": {
+            "secs": 0.375991
+        }
+    },
+    {
+        "type": "press",
+        "code": 71
+    }
+]

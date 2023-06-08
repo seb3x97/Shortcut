@@ -16,7 +16,7 @@
     "shortcut": [162, 160, 76],
     "actions": [
         {
-            "class": "mouse_move",
+            "name": "mouse_move",
             "args": {"dx": 100, "dy": 200}
         }
     ]
@@ -29,7 +29,7 @@ __COMMAND_NAME = 'name'
 __COMMAND_SHORTCUT = 'shortcut'
 __COMMAND_ACTIONS = 'actions'
 #
-__COMMAND_ACTION_CLASS = 'class'
+__COMMAND_ACTION_NAME = 'name'
 __COMMAND_ACTION_ARGS = 'args'
 
 #---------- Lambda Expressions ----------#
@@ -39,5 +39,12 @@ get_command_name = lambda command: command[__COMMAND_NAME]
 get_command_shortcut = lambda command: tuple(command[__COMMAND_SHORTCUT])
 get_command_actions = lambda command: command[__COMMAND_ACTIONS]
 #
-get_command_action_class = lambda action: action[__COMMAND_ACTION_CLASS]
+get_command_action_class = lambda action: action[__COMMAND_ACTION_NAME]
 get_command_action_args = lambda action: action[__COMMAND_ACTION_ARGS]
+
+# Crée une action JSON
+def create_action(name: str, args: dict):
+    return {
+        __COMMAND_ACTION_NAME: name,
+        __COMMAND_ACTION_ARGS: args,
+    }

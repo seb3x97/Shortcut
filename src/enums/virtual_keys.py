@@ -2,7 +2,7 @@
 
 import enum
 
-# Class VirtualKeys
+# Enum VirtualKeys
 class VirtualKeys(enum.Enum):
     VK_LBUTTON				= 0x01
     VK_RBUTTON				= 0x02

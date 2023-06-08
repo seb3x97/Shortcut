@@ -9,7 +9,7 @@ import pynput.mouse as py_mouse
 #---------- Locals ----------#
 
 import src.objects.actions.action as action
-import src.objects.enums.virtual_keys as virtual_keys
+import src.enums.virtual_keys as virtual_keys
 
 # Class ActionOtherDraw
 class ActionOtherDraw(action.Action):

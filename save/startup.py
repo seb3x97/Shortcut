@@ -11,7 +11,7 @@ import src.objects.actions.link as Link
 
 # Modes
 import src.objects.modes.mode as Mode
-import src.objects.enums.mode_type as ModeType
+import src.enums.mode_type as ModeType
 
 # Utils
 import src.utils.utils as Utils
@@ -88,7 +88,7 @@ class Startup():
                 # On essaye de récupére la classe de l'action
                 action_class: Action.Action = Link.action_links.get(class_name, None)
                 if action_class is None:
-                    print("Nom de la classe introuvable")
+                    print(f"Nom de la classe '{class_name}' introuvable")
                     return False
 
                 # On essaye d'instancier et de sauvegarder les données de l'action

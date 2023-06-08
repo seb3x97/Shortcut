@@ -39,6 +39,10 @@ class ManagerKeyboard(Manager.Manager):
     # On arrête le listener
     def stop(self) -> bool:
         return self.__keyboard_listner.stop()
+    
+    # On join le listener
+    def join(self) -> bool:
+        return self.__keyboard_listner.join()
 
 
     #---------- Functions ----------#

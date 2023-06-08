@@ -59,6 +59,13 @@ class ListenerKeyboard(Listener.Listener):
 
         # Succès
         return True
+    
+    # On join le listener
+    def join(self) -> bool:
+        self.__listener.join()
+
+        # Succès
+        return True
 
 
     #---------- Functions ----------#

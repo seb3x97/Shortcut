@@ -36,9 +36,12 @@ class Shortcut:
 # On essaye de démarrer le programme
 if __name__ == "__main__":
     shortcut = Shortcut()
-    if not shortcut.init() or not shortcut.start(): shortcut.stop()
+    if not shortcut.init() or not shortcut.start():
+        shortcut.stop()
+    #else:
+        #shortcut.handler.keyboard_manager.join()
 
-    # todo : enlever
+
     import time
     while True:
         time.sleep(1)

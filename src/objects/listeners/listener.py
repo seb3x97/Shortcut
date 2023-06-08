@@ -13,3 +13,6 @@ class Listener():
 
     # On arrête le listener
     def stop(self) -> None: raise NotImplementedError()
+
+    # On join le listener
+    def join(self) -> None: raise NotImplementedError()

@@ -16,19 +16,22 @@ import os
 #---------- DOSSIERS ----------#
 
 # Root
-DIR_ROOT = os.path.abspath("")
-DIR_LOG = os.path.join(DIR_ROOT, "log")
+DIR_ROOT = os.path.abspath('')
+DIR_LOG = os.path.join(DIR_ROOT, 'log')
 
 
 #---------- FICHIERS ----------#
 
 # Config
-FILE_CONFIG_MODE_NORMAL = os.path.join(DIR_ROOT, "config/modes/normal.json")
-FILE_CONFIG_MODE_ACTION = os.path.join(DIR_ROOT, "config/modes/action.json")
-FILE_CONFIG_MODE_CREATIVE = os.path.join(DIR_ROOT, "config/modes/creative.json")
+FILE_CONFIG = os.path.join(DIR_ROOT, 'config/config.json')
+FILE_CONFIG_CUSTOM = os.path.join(DIR_ROOT, 'config/config_custom.json')
+#
+FILE_CONFIG_MODE_NORMAL = os.path.join(DIR_ROOT, 'config/modes/normal.json')
+FILE_CONFIG_MODE_ACTION = os.path.join(DIR_ROOT, 'config/modes/action.json')
+FILE_CONFIG_MODE_CREATIVE = os.path.join(DIR_ROOT, 'config/modes/creative.json')
 
 # Datas
-FILE_COMMAND_CREATED = os.path.join(DIR_ROOT, "datas\commands_created.json")
+FILE_COMMAND_CREATED = os.path.join(DIR_ROOT, 'datas/commands_created.json')
 
 
 #---------- FONCTIONS ----------#

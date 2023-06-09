@@ -24,11 +24,20 @@ class Mode():
         # Default
         self.thread: CustomThread.CustomThread = None
         
-        # Liste des commandes
+        # Default
         self._commands: dict[tuple, Command.Command] = {}
+        self._last_mode: Mode = None
 
         # On enregistre
         self._handler: Handler.Handler = handler
+
+    # On définit le dernier mode utilisé
+    def set_last_mode(self, last_mode):
+        # On enregistre le dernier mode
+        self._last_mode = last_mode
+
+        # Succès
+        return True
 
     # On initialise le mode
     def init(self) -> bool:
@@ -70,35 +79,38 @@ class Mode():
         if not self.path_config:
             print(f"Le mode actuel n'a pas de chemin de config")
             return False
+        
+        # todo :
+        # On boucle les chemins de configuration
+        for path in self.path_config:
+            # On essaye de récupérer le contenu du fichier
+            content: str = Utils.read_file_content(path)
+            if content is None: return False
 
-        # On essaye de récupérer le contenu du fichier
-        content: str = Utils.read_file_content(self.path_config)
-        if content is None: return False
+            # On essaye de convertir le contenu en dictionnaire (json)
+            datas: dict = Utils.convert_text_to_json_object(content)
+            if datas is None: return False
 
-        # On essaye de convertir le contenu en dictionnaire (json)
-        datas: dict = Utils.convert_text_to_json(content)
-        if datas is None: return False
+            # On boucle les commandes
+            for data in datas['commands']:
+                # On récupére les données dans la commande
+                command_name: str = JsonNames.get_command_name(data)
+                command_shortcut: tuple = JsonNames.get_command_shortcut(data)
+                command_actions = JsonNames.get_command_actions(data)
 
-        # On boucle les commandes
-        for data in datas['commands']:
-            # On récupére les données dans la commande
-            command_name: str = JsonNames.get_command_name(data)
-            command_shortcut: tuple = JsonNames.get_command_shortcut(data)
-            command_actions = JsonNames.get_command_actions(data)
+                # Si la commande éxiste déjà
+                if command_shortcut in self._commands:
+                    print(f"Doublon du shortcut de la commande '{command_name}' et la commande '{self._commands.get(command_shortcut).name}'")
+                    break
 
-            # Si la commande éxiste déjà
-            if command_shortcut in self._commands:
-                print(f"Doublon du shortcut de la commande '{command_name}' et la commande '{self._commands.get(command_shortcut).name}'")
-                break
+                # On crée et ajoute la commande à la liste des commandes
+                command: Command.Command = self.convert_command_data_to_class(command_name, command_shortcut, command_actions)
+                if command is None:
+                    print(f"Une erreur est survenue l'hors du chargement de la commande '{command_name}'")
+                    break
 
-            # On crée et ajoute la commande à la liste des commandes
-            command: Command.Command = self.convert_command_data_to_class(command_name, command_shortcut, command_actions)
-            if command is None:
-                print(f"Une erreur est survenue l'hors du chargement de la commande '{command_name}'")
-                break
-
-            # On enregistre la commande
-            self._commands[command_shortcut] = command
+                # On enregistre la commande
+                self._commands[command_shortcut] = command
 
         # Succès
         return True

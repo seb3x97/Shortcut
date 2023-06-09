@@ -16,7 +16,7 @@ class ModeAction(Mode.Mode):
         super().__init__(handler)
 
         # Default
-        self.path_config = Paths.FILE_CONFIG_MODE_ACTION
+        self.path_config = [Paths.FILE_CONFIG_MODE_ACTION]
         self.command: Command.Command = None
 
     # On sauvegarde les arguments

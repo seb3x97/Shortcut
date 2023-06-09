@@ -15,7 +15,7 @@ class ModeNormal(mode.Mode):
         super().__init__(handler)
 
         # Default
-        self.path_config = Paths.FILE_CONFIG_MODE_NORMAL
+        self.path_config = [Paths.FILE_CONFIG_MODE_NORMAL, Paths.FILE_CONFIG_CUSTOM]  # todo : 
 
     # On sauvegarde les arguments
     def set_args(self) -> bool:

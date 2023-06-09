@@ -20,10 +20,10 @@ class ModeCreative(Mode.Mode):
         super().__init__(handler)
 
         # Default
-        self.path_config = Paths.FILE_CONFIG_MODE_CREATIVE
+        self.path_config = [Paths.FILE_CONFIG_MODE_CREATIVE]
 
         # Default
-        self.custom_commands = []
+        self.custom_actions = []
         self.last_action_time: datetime = None
 
     # On sauvegarde les arguments
@@ -34,14 +34,14 @@ class ModeCreative(Mode.Mode):
     # On éxécute les sous-tâches du mode
     def exec(self) -> bool:
         # Réinitialise
-        self.custom_commands = []
+        self.custom_actions = []
 
         # Succès
         return True
     
     # On ajoute une commande aux commandes
     def add_command(self, name: ActionLinks, args: dict):
-        self.custom_commands.append(json_names.create_action(
+        self.custom_actions.append(json_names.create_action(
             name.value,
             args,
         ))

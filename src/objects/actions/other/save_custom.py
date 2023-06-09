@@ -5,6 +5,7 @@ from __future__ import annotations
 #---------- Locals ----------#
 
 import src.objects.actions.action as action
+import src.utils.utils as utils
 
 # Class ActionOtherSaveCustom
 class ActionOtherSaveCustom(action.Action):
@@ -15,10 +16,22 @@ class ActionOtherSaveCustom(action.Action):
 
     # On démarre l'action
     def start(self) -> bool:
-        # Check si le mode est défini
-        if self._handler.mode is None: return False
+        # Check si le dernier mode est défini
+        if self._handler.mode._last_mode is None: return False
 
-        
+        # todo : check si l'ancien mode c'est le creatif
+
+        from src.objects.configs.childs.command import ConfigChildCommand
+        from src.objects.configs.childs.action import ConfigChildAction
+
+        #actions = list(map((lambda action: ConfigChildAction(**action)), self._handler.mode._last_mode.custom_actions))
+
+        command = ConfigChildCommand('test', (162, 165, 77), self._handler.mode._last_mode.custom_actions)
+
+        self._handler.config.custom.commands.clear()
+        self._handler.config.custom.commands.append(command)
+
+        self._handler.config.save_config_custom()
 
         # Succès
         return True

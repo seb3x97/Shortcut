@@ -20,9 +20,7 @@ class ActionOtherSleep(action.Action):
     def start(self) -> bool:
         # On mets en pause le thread pendant "x" (secs) secondes
         # Si un signal arrive pendant la pause, on ne fini pas la pause et on continue le code
-        print("we")
         self._handler.mode.thread.wait(self.secs)
-        print("end")
 
         # Succès
         return True

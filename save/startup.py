@@ -68,7 +68,7 @@ class Startup():
         if content is None: return False
 
         # On essaye de convertir le contenu en dictionnaire (json)
-        datas: dict = Utils.convert_text_to_json(content)
+        datas: dict = Utils.convert_text_to_json_object(content)
         if datas is None: return False
 
         # On supprime les anciennes commandes

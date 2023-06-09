@@ -4,6 +4,9 @@ from __future__ import annotations
 
 #---------- Locals ----------#
 
+# Configs
+import src.objects.handler.config as config
+
 # Managers
 import src.objects.managers.keyboard as keyboard
 import src.objects.managers.mouse as mouse
@@ -17,6 +20,8 @@ class Handler():
     # Default Constructor
     def __init__(self) -> None:
         # -- Default -- #
+        self.config = config.Config()
+        #
         self.keyboard_manager: keyboard.ManagerKeyboard = keyboard.ManagerKeyboard()        # Manager du clavier
         self.mouse_manager: mouse.ManagerMouse = mouse.ManagerMouse()                       # Manager de la souris
         #
@@ -66,12 +71,16 @@ class Handler():
 
     # On enregistre le mode (sans le démarrer)
     def set_mode(self, mode_type: mode_type.ModeType, args: list = []) -> bool:
+        # On récupére l'ancien mode
+        last_mode = self.mode
+
         # On stop l'ancien mode
         if not self.mode is None: self.mode.stop()
 
         # On essaye d'enregistrer le nouveau mode et de l'initialiser
         self.mode = self.__modes.get(mode_type, None)
         if self.mode is None: return False
+        if not self.mode.set_last_mode(last_mode): return False
         if not self.mode.set_args(*args): return False
 
         # Events du clavier

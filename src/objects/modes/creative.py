@@ -26,6 +26,8 @@ class ModeCreative(Mode.Mode):
         self.custom_actions = []
         self.last_action_time: datetime = None
 
+        self.keyboard_keys_pressed: dict = {}
+
     # On sauvegarde les arguments
     def set_args(self) -> bool:
         # Succès
@@ -68,6 +70,9 @@ class ModeCreative(Mode.Mode):
         # Si ce n'est pas une nouvelle touche on ne la prends pas en compte
         if not new: return
 
+        # On passe le keyboard press à true
+        if not code in self.keyboard_keys_pressed: self.keyboard_keys_pressed[code] = 1
+
         # On rempli le gap avec une attente
         self.fill_gap()
 
@@ -81,6 +86,14 @@ class ModeCreative(Mode.Mode):
 
     # Event quand on relâche une touche
     def on_release(self, code: int):
+        # todo : meilleur com
+        # Si on n'a pas encore appuyé sur le clavier ça veut dire
+        # qu'on reçoit le relâchement des touches de la commande créatif
+        if not code in self.keyboard_keys_pressed: return
+        self.keyboard_keys_pressed.pop(code)
+
+        print("we")
+
         # On rempli le gap avec une attente
         self.fill_gap()
 

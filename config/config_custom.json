@@ -1,5 +1,57 @@
 {
     "name": "custom",
     "commands": [
+        {
+            "name": "test",
+            "shortcut": [
+                162,
+                165,
+                77
+            ],
+            "actions": [
+                {
+                    "name": "keyboard_press",
+                    "args": {
+                        "code": 68
+                    }
+                },
+                {
+                    "name": "other_sleep",
+                    "args": {
+                        "secs": 0.071806
+                    }
+                },
+                {
+                    "name": "keyboard_release",
+                    "args": {
+                        "code": 68
+                    }
+                },
+                {
+                    "name": "other_sleep",
+                    "args": {
+                        "secs": 0.248328
+                    }
+                },
+                {
+                    "name": "keyboard_press",
+                    "args": {
+                        "code": 162
+                    }
+                },
+                {
+                    "name": "other_sleep",
+                    "args": {
+                        "secs": 0.0
+                    }
+                },
+                {
+                    "name": "keyboard_press",
+                    "args": {
+                        "code": 165
+                    }
+                }
+            ]
+        }
     ]
 }

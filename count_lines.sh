@@ -1,0 +1,1 @@
+dir -Recurse *.py | Get-Content | Measure-Object -Line

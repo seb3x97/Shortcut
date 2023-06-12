@@ -12,44 +12,48 @@
                 {
                     "name": "keyboard_press",
                     "args": {
-                        "code": 68
+                        "code": 65
                     }
                 },
                 {
                     "name": "other_sleep",
                     "args": {
-                        "secs": 0.071806
+                        "secs": 0.095976
                     }
                 },
                 {
                     "name": "keyboard_release",
                     "args": {
-                        "code": 68
+                        "code": 65
                     }
                 },
                 {
                     "name": "other_sleep",
                     "args": {
-                        "secs": 0.248328
+                        "secs": 1.079791
                     }
                 },
                 {
                     "name": "keyboard_press",
                     "args": {
-                        "code": 162
+                        "code": 83
                     }
                 },
                 {
                     "name": "other_sleep",
                     "args": {
-                        "secs": 0.0
+                        "secs": 0.071466
                     }
                 },
                 {
-                    "name": "keyboard_press",
+                    "name": "keyboard_release",
                     "args": {
-                        "code": 165
+                        "code": 83
                     }
+                },
+                {
+                    "name": "mode_normal",
+                    "args": {}
                 }
             ]
         }

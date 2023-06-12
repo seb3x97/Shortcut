@@ -88,9 +88,9 @@ class ManagerKeyboard(Manager.Manager):
             self.__being_pressed_key_code.append(code)
             self.__current_shortcut_key_code.append(code)
 
-        # On trigger l'event "shortcut" et "press"
-        if not self.on_shortcut is None: self.on_shortcut(self.__current_shortcut_key_code, new_key)
+        # On trigger l'event "press" et "shortcut"
         if not self.on_press is None: self.on_press(code, new_key)
+        if not self.on_shortcut is None: self.on_shortcut(self.__current_shortcut_key_code, new_key)
 
     # Event quand une touche est relachée
     def __on_release(self, code: int):

@@ -71,7 +71,7 @@ class ModeCreative(Mode.Mode):
         if not new: return
 
         # On passe le keyboard press à true
-        if not code in self.keyboard_keys_pressed: self.keyboard_keys_pressed[code] = 1
+        if not code in self.keyboard_keys_pressed: self.keyboard_keys_pressed[code] = None
 
         # On rempli le gap avec une attente
         self.fill_gap()
@@ -91,8 +91,6 @@ class ModeCreative(Mode.Mode):
         # qu'on reçoit le relâchement des touches de la commande créatif
         if not code in self.keyboard_keys_pressed: return
         self.keyboard_keys_pressed.pop(code)
-
-        print("we")
 
         # On rempli le gap avec une attente
         self.fill_gap()
@@ -154,5 +152,12 @@ class ModeCreative(Mode.Mode):
         # On récupére le code unique
         code: tuple = tuple(codes)
 
-        # Si le raccourci éxiste dans la liste des commandes on charge l'action
-        if new and (code in self._commands): self.load_action(code)
+        # Si le raccourci éxiste dans la liste des commandes
+        if new and (code in self._commands):
+            # todo : On enlève la commande des touches enregistrées
+            # todo : faire un meilleur système
+            numbers = len(code) * 2
+            self.custom_actions = self.custom_actions[:-numbers]
+
+            # On charge l'action
+            self.load_action(code)

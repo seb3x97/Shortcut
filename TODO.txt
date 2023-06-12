@@ -1,0 +1,2 @@
+- problème quand on laisse enfoncer la touche alt Gr (prit comme une commande quand après on utilise le "type")
+- faire un meilleur système pour supprimer la commande à la fin des "custom_actions"

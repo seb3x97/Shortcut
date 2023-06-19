@@ -22,6 +22,8 @@ class ActionMouseMoveTo(action.Action):
         # Check des paramètres
         if(self.x == None or self.y == None): return False
 
+        print(str(self.x) + " " + str(self.y))
+
         # Action => MoveTo
         self._handler.mouse_manager.move_to(self.x, self.y)
 

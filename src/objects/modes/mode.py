@@ -173,6 +173,6 @@ class Mode():
     def on_shortcut(self, codes: list[int], new: bool): pass
 
     # Events de la souris
-    def on_move(self, dx: int, dy: int): pass
+    def on_move(self, x: int, y: int): pass
     def on_click(self, x: int, y: int, button: py_mouse.Button, pressed: bool): pass
     def on_scroll(self, x: int, y: int, dx: int, dy: int): pass

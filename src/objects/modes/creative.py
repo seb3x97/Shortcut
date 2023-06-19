@@ -32,7 +32,7 @@ class ModeCreative(Mode.Mode):
     def set_args(self) -> bool:
         # Succès
         return True
-    
+
     # On éxécute les sous-tâches du mode
     def exec(self) -> bool:
         # Réinitialise
@@ -40,7 +40,7 @@ class ModeCreative(Mode.Mode):
 
         # Succès
         return True
-    
+
     # On ajoute une commande aux commandes
     def add_command(self, name: ActionLinks, args: dict):
         self.custom_actions.append(json_names.create_action(
@@ -104,16 +104,18 @@ class ModeCreative(Mode.Mode):
         )
 
     # Event quand la souris bouge
-    def on_move(self, dx: int, dy: int):
+    def on_move(self, x: int, y: int):
         # On rempli le gap avec une attente
         self.fill_gap()
 
+        print(str(x) + " " + str(y))
+
         # On execute la commande
         self.add_command(
-            ActionLinks.MOUSE_MOVE,
+            ActionLinks.MOUSE_MOVE_TO,
             {
-                'dx': dx,
-                'dy': dy,
+                'x': x,
+                'y': y,
             },
         )
 
